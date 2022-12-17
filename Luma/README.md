@@ -1,0 +1,1 @@
+﻿# Auto tests for the website "Luma"
