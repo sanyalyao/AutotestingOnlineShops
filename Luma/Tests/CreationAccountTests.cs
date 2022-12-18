@@ -15,7 +15,6 @@ namespace AutotestingOnlineShops.Luma
                 Email = GenerateRandomEmail(5),
                 Password = GenerateRandomPassword(16)
             };
-            app.Credentials.Save(newAccoount);
             app.Account.CreateNewAccount(newAccoount);
             Assert.IsTrue(app.Login.CheckIfLogged(newAccoount));
         }

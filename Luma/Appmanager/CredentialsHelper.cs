@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace AutotestingOnlineShops.Luma
 {
@@ -15,7 +16,14 @@ namespace AutotestingOnlineShops.Luma
 
         public void Save(AccountData account)
         {
-            // save credentials in the file
+            StreamWriter writer = new StreamWriter("account_credentials.json");
+            writer.Write(JsonConvert.SerializeObject(account, Formatting.Indented));
+            writer.Close();
+        }
+        public AccountData ReadAccountCredentials()
+        {
+            AccountData account = JsonConvert.DeserializeObject<AccountData>(File.ReadAllText("account_credentials.json"));
+            return account;
         }
     }
 }

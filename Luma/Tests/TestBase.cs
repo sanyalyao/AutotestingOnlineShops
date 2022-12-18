@@ -7,13 +7,6 @@ namespace AutotestingOnlineShops.Luma
     public class TestBase
     {
         protected Manager app;
-        protected AccountData defaultAccount = new AccountData()
-        {
-            FirstName = "dfg",
-            LastName = "dfg",
-            Email = "sdfsdf@google.com",
-            Password = "jkhgHJG465%$^"
-        };
         protected Random rnd = new Random();
 
         [SetUp]

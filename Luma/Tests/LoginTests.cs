@@ -8,6 +8,7 @@ namespace AutotestingOnlineShops.Luma
         [Test]
         public void LogIn()
         {
+            AccountData defaultAccount = app.Credentials.ReadAccountCredentials();
             app.Login.SignIn(defaultAccount.Email, defaultAccount.Password);
             Assert.IsTrue(app.Login.CheckIfLogged(defaultAccount));
         }

@@ -31,5 +31,10 @@ namespace AutotestingOnlineShops.Luma
         {
             driver.Navigate().GoToUrl(baseURL + "/customer/account/");
         }
+
+        public void GoToEditPage()
+        {
+            driver.Navigate().GoToUrl(baseURL + "/customer/account/edit/");
+        }
     }
 }
