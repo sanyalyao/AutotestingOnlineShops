@@ -135,7 +135,10 @@
     <Compile Include="Luma\Appmanager\MainHelper.cs" />
     <Compile Include="Luma\Appmanager\NavigationHelper.cs" />
     <Compile Include="Luma\Model\AccountData.cs" />
+    <Compile Include="Luma\Model\AddressData.cs" />
+    <Compile Include="Luma\Tests\AuthTestBase.cs" />
     <Compile Include="Luma\Tests\CreationAccountTests.cs" />
+    <Compile Include="Luma\Tests\EditAddresses.cs" />
     <Compile Include="Luma\Tests\LoginTests.cs" />
     <Compile Include="Luma\Tests\ModificationAccountTests.cs" />
     <Compile Include="Luma\Tests\TestBase.cs" />

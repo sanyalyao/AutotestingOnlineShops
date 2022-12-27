@@ -30,11 +30,19 @@ namespace AutotestingOnlineShops.Luma
         public void GoToAccountPage()
         {
             driver.Navigate().GoToUrl(baseURL + "/customer/account/");
+            new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(element => element.FindElement(By.CssSelector("span[class='base'][data-ui-id='page-title-wrapper']")).Text == "My Account");
         }
 
-        public void GoToEditPage()
+        public void GoToEditAccountPage()
         {
             driver.Navigate().GoToUrl(baseURL + "/customer/account/edit/");
+            new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(element => element.FindElement(By.CssSelector("span[class='base'][data-ui-id='page-title-wrapper']")).Text == "Edit Account Information");
+        }
+
+        public void GoToEditAddressPage()
+        {
+            driver.Navigate().GoToUrl(baseURL + "/customer/address/new/");
+            new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(element => element.FindElement(By.CssSelector("span[class='base'][data-ui-id='page-title-wrapper']")).Text == "Add New Address");
         }
     }
 }

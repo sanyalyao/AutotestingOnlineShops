@@ -8,15 +8,16 @@ namespace AutotestingOnlineShops.Luma
         [Test]
         public void CreateAccount()
         {
-            AccountData newAccoount = new AccountData()
+            AccountData newAccount = new AccountData()
             {
                 FirstName = GenerateRandomString(5),
                 LastName = GenerateRandomString(5),
                 Email = GenerateRandomEmail(5),
                 Password = GenerateRandomPassword(16)
             };
-            app.Account.CreateNewAccount(newAccoount);
-            Assert.IsTrue(app.Login.CheckIfLogged(newAccoount));
+            app.Account.CreateNewAccount(newAccount);
+            app.Credentials.SaveAccountWithoutDefaultAddress(newAccount);
+            Assert.IsTrue(app.Login.CheckIfLogged(newAccount));
         }
     }
 }
