@@ -44,5 +44,11 @@ namespace AutotestingOnlineShops.Luma
             driver.Navigate().GoToUrl(baseURL + "/customer/address/new/");
             new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(element => element.FindElement(By.CssSelector("span[class='base'][data-ui-id='page-title-wrapper']")).Text == "Add New Address");
         }
+
+        public void GoToAddressBookPage()
+        {
+            driver.Navigate().GoToUrl(baseURL + "/customer/address");
+            new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(element => element.FindElement(By.CssSelector("span[class='base'][data-ui-id='page-title-wrapper']")).Text == "Address Book");
+        }
     }
 }

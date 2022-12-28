@@ -1,6 +1,8 @@
-﻿namespace AutotestingOnlineShops.Luma
+﻿using System;
+
+namespace AutotestingOnlineShops.Luma
 {
-    public class AddressData
+    public class AddressData : IEquatable<AddressData>, IComparable<AddressData>
     {
         public string Firstname { get; set; }
         public string Lastname { get; set; }
@@ -12,7 +14,34 @@
         public string Zip { get; set; }
         public string Country { get; set; }
 
-        public string FullAddress()
+        public override string ToString()
+        {
+            return $"Phone = {PhoneNumber}; Street Address = {StreetAddress}; City = {City}; Zip = {Zip}";
+        }
+
+        public int CompareTo(AddressData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return 1;
+            }
+            return StreetAddress.CompareTo(other.StreetAddress);
+        }
+
+        public bool Equals(AddressData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (Object.ReferenceEquals(this, null))
+            {
+                return true;
+            }
+            return StreetAddress.Equals(other.StreetAddress) && City.Equals(other.City) && Zip.Equals(other.Zip) && Country.Equals(other.Country);
+        }
+
+        public string FullDefaultAddress()
         {
             string fullAddress = $"{Firstname} {Lastname}"
                 + "\r\n" + CompanyName
@@ -22,6 +51,7 @@
                 + "\r\n" + $"T: {PhoneNumber}";
             return fullAddress;
         }
+
 
     }
 }

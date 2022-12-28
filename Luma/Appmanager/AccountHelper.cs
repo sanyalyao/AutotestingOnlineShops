@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System.Linq;
 using System.Collections.Generic;
+using OpenQA.Selenium.Interactions;
 
 namespace AutotestingOnlineShops.Luma
 {
@@ -44,6 +45,9 @@ namespace AutotestingOnlineShops.Luma
             // city
             driver.FindElement(By.Id("city")).Clear();
             driver.FindElement(By.Id("city")).SendKeys(address.City);
+
+            // wait
+            new WebDriverWait(driver, TimeSpan.FromSeconds(60)).Until(element => element.FindElement(By.CssSelector("select[id='region_id'][name='region_id']")).Displayed);
 
             // state
             var number = driver.FindElement(By.Id("region_id")).FindElements(By.TagName("option")).Where(element => element.Text.ToLower() == address.State.ToLower()).First().GetAttribute("value");
@@ -107,7 +111,7 @@ namespace AutotestingOnlineShops.Luma
 
         public bool CheckIfHasDefaultAddress()
         {
-            return driver.FindElement(By.CssSelector("div[class='box box-billing-address']")).FindElement(By.TagName("address")).Text != "You have not set a default billing address.";
+            return driver.FindElement(By.CssSelector("div[class='box box-billing-address']")).FindElement(By.TagName("address")).Text == "You have not set a default billing address.";
         }
 
         public string GetDefaultAddress()
@@ -115,6 +119,83 @@ namespace AutotestingOnlineShops.Luma
             manager.Navigator.GoToAccountPage();
             string address = driver.FindElement(By.CssSelector("div[class='box box-billing-address']")).FindElement(By.TagName("address")).Text;
             return address;
+        }
+
+        public void AddAdditionalAddress(AddressData address)
+        {
+            manager.Navigator.GoToEditAddressPage();
+
+            // phone number
+            driver.FindElement(By.Id("telephone")).Clear();
+            driver.FindElement(By.Id("telephone")).SendKeys(address.PhoneNumber);
+
+            // street address
+            driver.FindElement(By.Id("street_1")).Clear();
+            driver.FindElement(By.Id("street_1")).SendKeys(address.StreetAddress);
+
+            // city
+            driver.FindElement(By.Id("city")).Clear();
+            driver.FindElement(By.Id("city")).SendKeys(address.City);
+
+            // wait
+            new WebDriverWait(driver, TimeSpan.FromSeconds(60)).Until(element => element.FindElement(By.CssSelector("select[id='region_id'][name='region_id']")).Displayed);
+
+            // state
+            IWebElement scrollView = driver.FindElement(By.CssSelector("select[id='region_id'][name='region_id']"));
+            Actions act = new Actions(driver);
+            act.MoveToElement(scrollView).Click().Perform();
+            var number = driver.FindElement(By.Id("region_id")).FindElements(By.TagName("option")).Where(element => element.Text.ToLower() == address.State.ToLower()).First().GetAttribute("value");
+            new SelectElement(driver.FindElement(By.Id("region_id"))).SelectByText(address.State);
+            driver.FindElement(By.CssSelector($"option[value=\"{number}\"]")).Click();
+
+            // zip code
+            driver.FindElement(By.Id("zip")).Clear();
+            driver.FindElement(By.Id("zip")).SendKeys(address.Zip);
+
+            // country
+            //driver.FindElement(By.Id("country")).FindElements(By.TagName("option")).Where(element => element.Text == address.Country).First().Click();
+
+            driver.FindElement(By.CssSelector("button[data-action='save-address']")).Click();
+        }
+
+        public bool CheckIfAdditionalAddressPresent()
+        {
+            try
+            {
+                return driver.FindElement(By.CssSelector("div[class='block block-addresses-list'] > div[class='block-content'] > p[class='empty']")).Text == "You have no other address entries in your address book.";
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public List<AddressData> GetAdditionalAddresses()
+        {
+            manager.Navigator.GoToAddressBookPage();
+            if (CheckIfAdditionalAddressPresent())
+            {
+                List<AddressData> emptyList = new List<AddressData>();
+                return emptyList;
+            }
+            List<AddressData> additionalAddressesList = new List<AddressData>();
+            ICollection<IWebElement> additionalAddresses = driver.FindElement(By.CssSelector("div[class='table-wrapper additional-addresses']")).FindElement(By.TagName("tbody")).FindElements(By.TagName("tr"));
+            for (int i = 0; i < additionalAddresses.Count(); i++)
+            {
+                AddressData additionalAddress = new AddressData()
+                {
+                    Firstname = driver.FindElement(By.CssSelector("td[data-th='First Name']")).Text,
+                    Lastname = driver.FindElement(By.CssSelector("td[data-th='Last Name']")).Text,
+                    StreetAddress = driver.FindElement(By.CssSelector("td[data-th='Street Address']")).Text,
+                    City = driver.FindElement(By.CssSelector("td[data-th='City']")).Text,
+                    Country = driver.FindElement(By.CssSelector("td[data-th='Country']")).Text,
+                    State = driver.FindElement(By.CssSelector("td[data-th='State']")).Text,
+                    Zip = driver.FindElement(By.CssSelector("td[data-th='Zip/Postal Code']")).Text,
+                    PhoneNumber = driver.FindElement(By.CssSelector("td[data-th='Phone']")).Text
+                };
+                additionalAddressesList.Add(additionalAddress);
+            }
+            return additionalAddressesList;
         }
     }
 }

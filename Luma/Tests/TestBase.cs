@@ -132,7 +132,7 @@ namespace AutotestingOnlineShops.Luma
                 "Wisconsin",
                 "Wyoming"
             };
-            string state = states[rnd.Next(1, states.Count)];
+            string state = states[rnd.Next(1, states.Count - 1)];
             return state;
         }
 
