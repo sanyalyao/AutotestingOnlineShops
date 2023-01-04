@@ -32,10 +32,10 @@ namespace AutotestingOnlineShops.Luma
             return new string(Enumerable.Repeat(chars, length).Select(s => s[rnd.Next(s.Length)]).ToArray()) + "@google.com";
         }
 
-        public string GenerateRandomPassword(int length)
+        public string GenerateRandomPassword()
         {
             string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%";
-            return new string(Enumerable.Repeat(chars, length).Select(s => s[rnd.Next(s.Length)]).ToArray());
+            return new string(Enumerable.Repeat(chars, 16).Select(s => s[rnd.Next(s.Length)]).ToArray());
         }
 
         public string GenerateRandomPhoneNumber()

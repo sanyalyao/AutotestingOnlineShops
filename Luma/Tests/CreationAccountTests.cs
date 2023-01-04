@@ -13,10 +13,11 @@ namespace AutotestingOnlineShops.Luma
                 FirstName = GenerateRandomString(5),
                 LastName = GenerateRandomString(5),
                 Email = GenerateRandomEmail(5),
-                Password = GenerateRandomPassword(16)
+                Password = GenerateRandomPassword()
             };
             app.Account.CreateNewAccount(newAccount);
             app.Credentials.SaveAccountWithoutDefaultAddress(newAccount);
+            app.Credentials.SaveNewCredentialsCurrentAccount(newAccount);
             Assert.IsTrue(app.Login.CheckIfLogged(newAccount));
         }
     }

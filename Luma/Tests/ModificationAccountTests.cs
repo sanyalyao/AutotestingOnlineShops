@@ -20,7 +20,7 @@ namespace AutotestingOnlineShops.Luma
                 FirstName = GenerateRandomString(8),
                 LastName = GenerateRandomString(8),
                 Email = GenerateRandomEmail(7),
-                Password = GenerateRandomPassword(8),
+                Password = GenerateRandomPassword(),
             };
             app.Account.ModifyAccount(oldAccount, newAccount);
             app.Credentials.SaveNewCredentialsCurrentAccount(newAccount);
