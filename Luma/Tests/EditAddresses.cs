@@ -93,5 +93,43 @@ namespace AutotestingOnlineShops.Luma
             oldAdditionalAddresses.RemoveAt(0);
             Assert.AreEqual(oldAdditionalAddresses.Count, newAdditionalAddresses.Count);
         }
+
+        [Test]
+        public void EditAdditionalAddress()
+        {
+            AccountData accountWithAddress = app.Credentials.ReadAccountCredentials(accountWithDefaultAddress);
+            app.Login.SignIn(accountWithAddress);
+            if (app.Account.GetAdditionalAddresses().Count() == 0)
+            {
+                AddressData newAdditionalAddress = new AddressData()
+                {
+                    Firstname = accountWithAddress.FirstName,
+                    Lastname = accountWithAddress.LastName,
+                    PhoneNumber = GenerateRandomPhoneNumber(),
+                    StreetAddress = GenerateRandomString(10),
+                    City = GenerateRandomString(10),
+                    State = GetRandomState(),
+                    Zip = GenerateRandomZipCode(),
+                    Country = "United States"
+                };
+                app.Account.AddAdditionalAddress(newAdditionalAddress);
+            }
+            AddressData editAdditionalAddress = new AddressData()
+            {
+                Firstname = accountWithAddress.FirstName,
+                Lastname = accountWithAddress.LastName,
+                PhoneNumber = GenerateRandomPhoneNumber(),
+                StreetAddress = GenerateRandomString(10),
+                City = GenerateRandomString(10),
+                State = GetRandomState(),
+                Zip = GenerateRandomZipCode(),
+                Country = "United States"
+            };
+            List<AddressData> oldAdditionalAddresses = app.Account.GetAdditionalAddresses();
+            app.Account.EditAdditionalAddress(0, editAdditionalAddress);
+            List<AddressData> newAdditionalAddresses = app.Account.GetAdditionalAddresses();
+            Assert.AreEqual(oldAdditionalAddresses.Count, newAdditionalAddresses.Count);
+            Assert.Contains(editAdditionalAddress, newAdditionalAddresses);
+        }
     }
 }

@@ -116,11 +116,57 @@ namespace AutotestingOnlineShops.Luma
             // scroll to the table with additional addresses
             IWebElement table = driver.FindElement(By.CssSelector("div[class='table-wrapper additional-addresses']"));
             Actions actions = new Actions(driver);
-            actions.MoveToElement(table);
-            actions.Perform();
+            actions.MoveToElement(table).Perform();
 
             driver.FindElement(By.CssSelector("div[class='table-wrapper additional-addresses']")).FindElement(By.TagName("tbody")).FindElements(By.TagName("tr"))[sequenceNumber].FindElement(By.CssSelector("td[data-th='Actions']")).FindElements(By.TagName("a"))[1].Click();
             driver.FindElement(By.CssSelector("button[class='action-primary action-accept']")).SendKeys(Keys.Enter);
+        }
+
+        internal void EditAdditionalAddress(int sequenceNumber, AddressData address)
+        {
+            manager.Navigator.GoToAddressBookPage();
+
+            // scroll to the table with additional addresses
+            IWebElement table = driver.FindElement(By.CssSelector("div[class='table-wrapper additional-addresses']"));
+            Actions actions = new Actions(driver);
+            actions.MoveToElement(table);
+            actions.Perform();
+
+            driver.FindElement(By.CssSelector("div[class='table-wrapper additional-addresses']")).FindElement(By.TagName("tbody")).FindElements(By.TagName("tr"))[sequenceNumber].FindElement(By.CssSelector("td[data-th='Actions']")).FindElements(By.TagName("a"))[0].Click();
+
+            // wait
+            new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(element => element.FindElement(By.CssSelector("span[class='base'][data-ui-id='page-title-wrapper']")).Text == "Edit Address");
+
+            // fill form
+
+            // phone number
+            driver.FindElement(By.Id("telephone")).Clear();
+            driver.FindElement(By.Id("telephone")).SendKeys(address.PhoneNumber);
+
+            // street address
+            driver.FindElement(By.Id("street_1")).Clear();
+            driver.FindElement(By.Id("street_1")).SendKeys(address.StreetAddress);
+
+            // city
+            driver.FindElement(By.Id("city")).Clear();
+            driver.FindElement(By.Id("city")).SendKeys(address.City);
+
+            // wait
+            new WebDriverWait(driver, TimeSpan.FromSeconds(60)).Until(element => element.FindElement(By.CssSelector("select[id='region_id'][name='region_id']")).Displayed);
+
+            // state
+            IWebElement scrollView = driver.FindElement(By.CssSelector("select[id='region_id'][name='region_id']"));
+            Actions action = new Actions(driver);
+            action.MoveToElement(scrollView).Click().Perform();
+            var number = driver.FindElement(By.Id("region_id")).FindElements(By.TagName("option")).Where(element => element.Text.ToLower() == address.State.ToLower()).First().GetAttribute("value");
+            new SelectElement(driver.FindElement(By.Id("region_id"))).SelectByText(address.State);
+            driver.FindElement(By.CssSelector($"option[value=\"{number}\"]")).Click();
+
+            // zip code
+            driver.FindElement(By.Id("zip")).Clear();
+            driver.FindElement(By.Id("zip")).SendKeys(address.Zip);
+
+            driver.FindElement(By.CssSelector("button[data-action='save-address']")).Click();
         }
 
         public bool CheckIfHasDefaultAddress()
