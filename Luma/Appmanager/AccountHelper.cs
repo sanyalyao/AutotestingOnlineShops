@@ -97,7 +97,7 @@ namespace AutotestingOnlineShops.Luma
             driver.FindElement(By.CssSelector("button[type='submit'][class='action save primary']")).Click();
 
             // wait
-            new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(element => element.FindElement(By.CssSelector("span[class='base'][data-ui-id='page-title-wrapper']")).Text == "My Account");
+            new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(element => element.FindElement(By.CssSelector("div[class='message-success success message']")).Text == "You saved the account information.");
         }
 
         public void FillForm(AccountData newAccount)
@@ -107,6 +107,20 @@ namespace AutotestingOnlineShops.Luma
             driver.FindElement(By.Id("email_address")).SendKeys(newAccount.Email);
             driver.FindElement(By.Id("password")).SendKeys(newAccount.Password);
             driver.FindElement(By.Id("password-confirmation")).SendKeys(newAccount.Password);
+        }
+
+        public void DeleteAdditionalAddress(int sequenceNumber)
+        {
+            manager.Navigator.GoToAddressBookPage();
+
+            // scroll to the table with additional addresses
+            IWebElement table = driver.FindElement(By.CssSelector("div[class='table-wrapper additional-addresses']"));
+            Actions actions = new Actions(driver);
+            actions.MoveToElement(table);
+            actions.Perform();
+
+            driver.FindElement(By.CssSelector("div[class='table-wrapper additional-addresses']")).FindElement(By.TagName("tbody")).FindElements(By.TagName("tr"))[sequenceNumber].FindElement(By.CssSelector("td[data-th='Actions']")).FindElements(By.TagName("a"))[1].Click();
+            driver.FindElement(By.CssSelector("button[class='action-primary action-accept']")).SendKeys(Keys.Enter);
         }
 
         public bool CheckIfHasDefaultAddress()

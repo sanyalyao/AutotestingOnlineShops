@@ -22,7 +22,7 @@ namespace AutotestingOnlineShops.Luma
             driver.Manage().Window.Maximize();
             baseURL = "https://magento.softwaretestingboard.com/";
             navigationHelper = new NavigationHelper(this, baseURL);
-            loginHelper = new LoginHelper(this);
+            loginHelper = new LoginHelper(this, baseURL);
             accountHelper = new AccountHelper(this);
             credentialsHelper = new CredentialsHelper(this);
             // helpers below

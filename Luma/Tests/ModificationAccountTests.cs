@@ -24,6 +24,10 @@ namespace AutotestingOnlineShops.Luma
             };
             app.Account.ModifyAccount(oldAccount, newAccount);
             app.Credentials.SaveNewCredentialsCurrentAccount(newAccount);
+            Assert.AreNotEqual(oldAccount.FirstName, newAccount.FirstName);
+            Assert.AreNotEqual(oldAccount.LastName, newAccount.LastName);
+            Assert.AreNotEqual(oldAccount.Email, newAccount.Email);
+            Assert.AreNotEqual(oldAccount.Password, newAccount.Password);
         }
     }
 }

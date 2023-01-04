@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
 using NUnit.Framework;
 
 namespace AutotestingOnlineShops.Luma
@@ -15,7 +11,7 @@ namespace AutotestingOnlineShops.Luma
         public void AddDefaultAddress()
         {
             AccountData accountWithoutAddress = app.Credentials.ReadAccountCredentials(accountWithoutDefaultAddress);
-            app.Login.SignIn(accountWithoutAddress.Email, accountWithoutAddress.Password);
+            app.Login.SignIn(accountWithoutAddress);
             AddressData newAddress = new AddressData()
             {
                 Firstname = accountWithoutAddress.FirstName,
@@ -39,7 +35,7 @@ namespace AutotestingOnlineShops.Luma
         public void AddAdditionalAddress()
         {
             AccountData accountWithAddress = app.Credentials.ReadAccountCredentials(accountWithDefaultAddress);
-            app.Login.SignIn(accountWithAddress.Email, accountWithAddress.Password);
+            app.Login.SignIn(accountWithAddress);
             AddressData newAdditionalAddress = new AddressData()
             {
                 Firstname = accountWithAddress.FirstName,
@@ -55,6 +51,7 @@ namespace AutotestingOnlineShops.Luma
             app.Account.AddAdditionalAddress(newAdditionalAddress);
             List<AddressData> newAdditionalAddresses = app.Account.GetAdditionalAddresses();
             oldAdditionalAddresses.Add(newAdditionalAddress);
+            Assert.AreEqual(oldAdditionalAddresses.Count, newAdditionalAddresses.Count);
             foreach (AddressData oldAddress in oldAdditionalAddresses)
             {
                 foreach (AddressData newAddress in newAdditionalAddresses)
@@ -68,6 +65,33 @@ namespace AutotestingOnlineShops.Luma
                     }
                 }
             }
+        }
+
+        [Test]
+        public void DeleteAdditionalAddress()
+        {
+            AccountData accountWithAddress = app.Credentials.ReadAccountCredentials(accountWithDefaultAddress);
+            app.Login.SignIn(accountWithAddress);
+            if (app.Account.GetAdditionalAddresses().Count() == 0)
+            {
+                AddressData newAdditionalAddress = new AddressData()
+                {
+                    Firstname = accountWithAddress.FirstName,
+                    Lastname = accountWithAddress.LastName,
+                    PhoneNumber = GenerateRandomPhoneNumber(),
+                    StreetAddress = GenerateRandomString(10),
+                    City = GenerateRandomString(10),
+                    State = GetRandomState(),
+                    Zip = GenerateRandomZipCode(),
+                    Country = "United States"
+                };
+                app.Account.AddAdditionalAddress(newAdditionalAddress);
+            }
+            List<AddressData> oldAdditionalAddresses = app.Account.GetAdditionalAddresses();
+            app.Account.DeleteAdditionalAddress(0);
+            List<AddressData> newAdditionalAddresses = app.Account.GetAdditionalAddresses();
+            oldAdditionalAddresses.RemoveAt(0);
+            Assert.AreEqual(oldAdditionalAddresses.Count, newAdditionalAddresses.Count);
         }
     }
 }

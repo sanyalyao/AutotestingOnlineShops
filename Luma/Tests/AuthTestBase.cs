@@ -10,7 +10,7 @@ namespace AutotestingOnlineShops.Luma
         public void SetupLogin()
         {
             defaultAccount = app.Credentials.ReadAccountCredentials(credentialsCurrentAccount);
-            app.Login.SignIn(defaultAccount.Email, defaultAccount.Password);
+            app.Login.SignIn(defaultAccount);
         }
     }
 }
