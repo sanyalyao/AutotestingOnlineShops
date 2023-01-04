@@ -65,6 +65,12 @@ namespace AutotestingOnlineShops.Luma
             driver.FindElement(By.CssSelector("button[data-action='save-address']")).Click();
         }
 
+        public string GetFullAccountInfo()
+        {
+            manager.Navigator.GoToAccountPage();
+            return driver.FindElement(By.CssSelector("div[class='box box-information']")).FindElement(By.TagName("p")).Text;
+        }
+
         public void ModifyAccount(AccountData oldAccount, AccountData newAccount)
         {
             manager.Navigator.GoToEditAccountPage();

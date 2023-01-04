@@ -52,19 +52,7 @@ namespace AutotestingOnlineShops.Luma
             List<AddressData> newAdditionalAddresses = app.Account.GetAdditionalAddresses();
             oldAdditionalAddresses.Add(newAdditionalAddress);
             Assert.AreEqual(oldAdditionalAddresses.Count, newAdditionalAddresses.Count);
-            foreach (AddressData oldAddress in oldAdditionalAddresses)
-            {
-                foreach (AddressData newAddress in newAdditionalAddresses)
-                {
-                    if (oldAddress.StreetAddress.Equals(newAddress.StreetAddress))
-                    {
-                        Assert.AreEqual(oldAddress.City, newAddress.City);
-                        Assert.AreEqual(oldAddress.Zip, newAddress.Zip);
-                        Assert.AreEqual(oldAddress.PhoneNumber, newAddress.PhoneNumber);
-                        Assert.AreEqual(oldAddress.State, newAddress.State);
-                    }
-                }
-            }
+            Assert.Contains(newAdditionalAddress, newAdditionalAddresses);
         }
 
         [Test]

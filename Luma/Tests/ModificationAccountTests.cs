@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace AutotestingOnlineShops.Luma
 {
@@ -24,10 +18,11 @@ namespace AutotestingOnlineShops.Luma
             };
             app.Account.ModifyAccount(oldAccount, newAccount);
             app.Credentials.SaveNewCredentialsCurrentAccount(newAccount);
-            Assert.AreNotEqual(oldAccount.FirstName, newAccount.FirstName);
-            Assert.AreNotEqual(oldAccount.LastName, newAccount.LastName);
-            Assert.AreNotEqual(oldAccount.Email, newAccount.Email);
-            Assert.AreNotEqual(oldAccount.Password, newAccount.Password);
+            app.Credentials.SaveAccountWithoutDefaultAddress(newAccount);
+            app.Login.SignIn(newAccount);
+            string currentAccount = newAccount.FullAccountInfo();
+            string newAccountInfo = app.Account.GetFullAccountInfo();
+            Assert.AreEqual(currentAccount, newAccountInfo);
         }
     }
 }

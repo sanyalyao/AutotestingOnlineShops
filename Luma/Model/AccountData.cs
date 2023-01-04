@@ -39,5 +39,9 @@ namespace AutotestingOnlineShops.Luma
             return FirstName.Equals(other.FirstName) && LastName.Equals(other.LastName);
         }
 
+        public string FullAccountInfo()
+        {
+            return $"{FirstName} {LastName}\r\n{Email}";
+        }
     }
 }
