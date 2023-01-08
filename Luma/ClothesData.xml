@@ -4,7 +4,7 @@
 		<TopsMan>
 			<CategoryTops>
 				<Category>Jackets</Category>
-				<Category>Hoodies and Sweatshirts</Category>
+				<Category>"Hoodies and Sweatshirts"</Category>
 				<Category>Tees</Category>
 				<Category>Tanks</Category>
 			</CategoryTops>
@@ -31,6 +31,23 @@
 				<Size>L</Size>
 				<Size>XL</Size>
 			</SizeTops>
+			<ColorTops>
+				<Color>Black</Color>
+				<Color>Blue</Color>
+				<Color>Brown</Color>
+				<Color>Gray</Color>
+				<Color>Green</Color>
+				<Color>Lavender</Color>
+				<Color>Orange</Color>
+				<Color>Purple</Color>
+				<Color>Red</Color>
+				<Color>White</Color>
+				<Color>Yellow</Color>
+			</ColorTops>
+			<MaterialTops>
+				<Material>Cocona® performance fabric</Material>
+				<Material>Cotton</Material>
+			</MaterialTops>
 		</TopsMan>
 		<BottomsMan>
 			<CategoryBottoms>
@@ -75,6 +92,18 @@
 				<Size>L</Size>
 				<Size>XL</Size>
 			</SizeTops>
+			<ColorTops>
+				<Color>Black</Color>
+				<Color>Blue</Color>
+				<Color>Brown</Color>
+				<Color>Gray</Color>
+				<Color>Green</Color>
+				<Color>Orange</Color>
+				<Color>Purple</Color>
+				<Color>Red</Color>
+				<Color>White</Color>
+				<Color>Yellow</Color>
+			</ColorTops>
 		</TopsWoman>
 		<BottomsWoman>
 			<CategoryBottoms>

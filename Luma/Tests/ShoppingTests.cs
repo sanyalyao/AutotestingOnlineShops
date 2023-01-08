@@ -17,30 +17,38 @@ namespace AutotestingOnlineShops.Luma
         [Test]
         public void BuyWomanClothes()
         {
-            GetCategoryTops("man");
-            //ClothesData clothes = new ClothesData()
-            //{
-            //    MenClothes = new MenClothes
-            //    {
-            //        TopsMan = new TopsMan
-            //        {
-            //            CategoryTops = new CategoryTops()
-            //            {
-            //                Category = GetCategoryTops("man")
-            //            },
+            string sex = "Female";
+            ClothesData clothes = new ClothesData()
+            {
+                WomenClothes = new WomenClothes
+                {
+                    TopsWoman = new TopsWoman
+                    {
+                        CategoryTops = new CategoryTops()
+                        {
+                            Category = GetCategoryTops(sex)
+                        },
 
-            //            Style = new StyleTops()
-            //            {
-            //                Style = GetStyleTops("man")
-            //            }
-            //        }
-                    //BottomsMan = new BottomsMan()
-                    //{
-                    //    Category = new Category()
-                    //    {
-                    //        Category2 = GetCategoryTops("Bottoms").Category2
-                    //    }
-                    //}
+                        StyleTops = new StyleTops()
+                        {
+                            Style = GetStyleTops(sex)
+                        },
+
+                        SizeTops = new SizeTops()
+                        {
+                            Size = GetSize(sex)
+                        },
+
+                        ColorTops = new ColorTops()
+                        {
+                            Color = GetColor(sex)
+                        },
+
+                        MaterialTops = new MaterialTops()
+                        {
+                            Material = GetMaterial(sex)
+                        }
+                    }
                     //Style = GetStyleClothes("Woman"),
                     //Size = GetSize(),
                     //Price = GetPrice(),
@@ -51,8 +59,8 @@ namespace AutotestingOnlineShops.Luma
                     //ErinRecommends = GetYesOrNo(),
                     //Pattern = GetPattern(),
                     //Climate = GetClimate()
-            //    }
-            //};
+                }
+            };
         }
 
         [Test]

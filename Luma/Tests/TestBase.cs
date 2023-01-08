@@ -86,10 +86,10 @@ namespace AutotestingOnlineShops.Luma
         public string GetCategoryTops(string sex)
         {
             List<string> categories = new List<string>();
-            if (sex.ToLower() == "man")
+            if (sex.ToLower() == "male")
             {
                 IEnumerable<XElement> elements = loadXmlFile.Element("MenClothes").Element("TopsMan").Element("CategoryTops").Descendants("Category");
-                foreach (XElement element in elements) 
+                foreach (XElement element in elements)
                 {
                     categories.Add(element.Value);
                 }
@@ -111,7 +111,7 @@ namespace AutotestingOnlineShops.Luma
         public string GetStyleTops(string sex)
         {
             List<string> styles = new List<string>();
-            if (sex.ToLower() == "man")
+            if (sex.ToLower() == "male")
             {
                 IEnumerable<XElement> elements = loadXmlFile.Element("MenClothes").Element("TopsMan").Element("StyleTops").Descendants("Style");
                 foreach (XElement element in elements)
@@ -136,7 +136,7 @@ namespace AutotestingOnlineShops.Luma
         public string GetSize(string sex)
         {
             List<string> sizes = new List<string>();
-            if (sex.ToLower() == "man")
+            if (sex.ToLower() == "male")
             {
                 IEnumerable<XElement> elements = loadXmlFile.Element("MenClothes").Element("TopsMan").Element("SizeTops").Descendants("Size");
                 foreach (XElement element in elements)
@@ -155,6 +155,56 @@ namespace AutotestingOnlineShops.Luma
                 }
                 string size = sizes[rnd.Next(sizes.Count())];
                 return size;
+            }
+        }
+
+        public string GetColor(string sex)
+        {
+            List<string> colors = new List<string>();
+            if (sex.ToLower() == "male")
+            {
+                IEnumerable<XElement> elements = loadXmlFile.Element("MenClothes").Element("TopsMan").Element("ColorTops").Descendants("Color");
+                foreach (XElement element in elements)
+                {
+                    colors.Add(element.Value);
+                }
+                string color = colors[rnd.Next(colors.Count())];
+                return color;
+            }
+            else
+            {
+                IEnumerable<XElement> elements = loadXmlFile.Element("WomenClothes").Element("TopsWoman").Element("ColorTops").Descendants("Color");
+                foreach (XElement element in elements)
+                {
+                    colors.Add(element.Value);
+                }
+                string color = colors[rnd.Next(colors.Count())];
+                return color;
+            }
+        }
+
+        public string GetMaterial(string sex)
+        {
+            List<string> materials = new List<string>();
+            if (sex.ToLower() == "male")
+            {
+                IEnumerable<XElement> elements = loadXmlFile.Element("MenClothes").Element("TopsMan").Element("MaterialTops").Descendants("Material");
+                foreach (XElement element in elements)
+                {
+                    materials.Add(element.Value);
+                }
+                string material = materials[rnd.Next(materials.Count())];
+                return material;
+            }
+            else
+            {
+                IEnumerable<XElement> elements = loadXmlFile.Element("WomenClothes").Element("TopsWoman").Element("MaterialTops").Descendants("Material");
+                foreach (XElement element in elements)
+                {
+                    materials.Add(element.Value);
+                }
+                string material = materials[rnd.Next(materials.Count())];
+                return material;
             }
         }
     }

@@ -15,7 +15,7 @@
     }
     public class WomenClothes
     {
-        public TopsMan TopsWoman { get; set; }
+        public TopsWoman TopsWoman { get; set; }
 
         //public BottomsWoman BottomsWoman { get; set; }
     }
@@ -24,11 +24,11 @@
     {
         public CategoryTops CategoryTops { get; set; }
 
-        public StyleTops Style { get; set; }
-        public SizeTops Size { get; set; }
+        public StyleTops StyleTops { get; set; }
+        public SizeTops SizeTops { get; set; }
         //public string Price { get; set; }
-        //public string Color { get; set; }
-        //public string Material { get; set; }
+        public ColorTops ColorTops { get; set; }
+        public MaterialTops MaterialTops { get; set; }
         //public string EcoCollection { get; set; }
         //public string PerfomanceFabric { get; set; }
         //public string ErinRecommends { get; set; }
@@ -42,11 +42,11 @@
     {
         public CategoryTops CategoryTops { get; set; }
 
-        public StyleTops Style { get; set; }
-        public SizeTops Size { get; set; }
+        public StyleTops StyleTops { get; set; }
+        public SizeTops SizeTops { get; set; }
         //public string Price { get; set; }
-        //public string Color { get; set; }
-        //public string Material { get; set; }
+        public ColorTops ColorTops { get; set; }
+        public MaterialTops MaterialTops { get; set; }
         //public string EcoCollection { get; set; }
         //public string PerfomanceFabric { get; set; }
         //public string ErinRecommends { get; set; }
@@ -84,5 +84,15 @@
     public class SizeTops
     {
         public string Size { get; set; }
+    }
+
+    public class ColorTops
+    {
+        public string Color { get; set; }
+    }
+
+    public class MaterialTops
+    {
+        public string Material { get; set; }
     }
 }
