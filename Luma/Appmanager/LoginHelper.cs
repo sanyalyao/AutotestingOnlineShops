@@ -47,6 +47,7 @@ namespace AutotestingOnlineShops.Luma
         {
             driver.FindElement(By.CssSelector("button[class='action switch'][data-action='customer-menu-toggle']")).Click();
             driver.FindElement(By.CssSelector("div[class='customer-menu'][data-target='dropdown']")).FindElement(By.LinkText("Sign Out")).Click();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(element => element.Url == baseURL);
         }
     }
 }

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ClothesData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<MenClothes>
+		<TopsMan>
+			<CategoryTops>
+				<Category>Jackets</Category>
+				<Category>Hoodies and Sweatshirts</Category>
+				<Category>Tees</Category>
+				<Category>Tanks</Category>
+			</CategoryTops>
+			<StyleTops>
+				<Style>Insulated</Style>
+				<Style>Jacket</Style>
+				<Style>Lightweight</Style>
+				<Style>Hooded</Style>
+				<Style>Heavy Duty</Style>
+				<Style>Rain Coat</Style>
+				<Style>Hard Shell</Style>
+				<Style>Soft Shell</Style>
+				<Style>Windbreaker</Style>
+				<Style>zip</Style>
+				<Style>Full Zip</Style>
+				<Style>Reversible</Style>
+				<Style>Tank</Style>
+				<Style>Tee</Style>
+			</StyleTops>
+			<SizeTops>
+				<Size>XS</Size>
+				<Size>S</Size>
+				<Size>M</Size>
+				<Size>L</Size>
+				<Size>XL</Size>
+			</SizeTops>
+		</TopsMan>
+		<BottomsMan>
+			<CategoryBottoms>
+				<Category>Pants</Category>
+				<Category>Shorts</Category>
+			</CategoryBottoms>
+		</BottomsMan>
+	</MenClothes>
+	
+	<WomenClothes>	
+		<TopsWoman>
+			<CategoryTops>
+				<Category>Jackets</Category>
+				<Category>Hoodies and Sweatshirts</Category>
+				<Category>Tees</Category>
+				<Category>Bras and Tanks</Category>
+			</CategoryTops>
+			<StyleTops>
+				<Style>Insulated</Style>
+				<Style>Jacket</Style>
+				<Style>Lightweight</Style>
+				<Style>Hooded</Style>
+				<Style>Heavy Duty</Style>
+				<Style>Rain Coat</Style>
+				<Style>Hard Shell</Style>
+				<Style>Soft Shell</Style>
+				<Style>Windbreaker</Style>
+				<Style>zip</Style>
+				<Style>Full Zip</Style>
+				<Style>Reversible</Style>
+				<Style>Bra</Style>
+				<Style>Tank</Style>
+				<Style>Tee</Style>
+				<Style>Pullover</Style>
+				<Style>Hoodie</Style>
+				<Style>Camisole</Style>
+			</StyleTops>
+			<SizeTops>
+				<Size>XS</Size>
+				<Size>S</Size>
+				<Size>M</Size>
+				<Size>L</Size>
+				<Size>XL</Size>
+			</SizeTops>
+		</TopsWoman>
+		<BottomsWoman>
+			<CategoryBottoms>
+				<Category>Pants</Category>
+				<Category>Shorts</Category>
+			</CategoryBottoms>
+		</BottomsWoman>
+	</WomenClothes>
+</ClothesData>

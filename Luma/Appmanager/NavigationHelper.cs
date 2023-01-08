@@ -50,5 +50,11 @@ namespace AutotestingOnlineShops.Luma
             driver.Navigate().GoToUrl(baseURL + "/customer/address");
             new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(element => element.FindElement(By.CssSelector("span[class='base'][data-ui-id='page-title-wrapper']")).Text == "Address Book");
         }
+
+        public void GoToManClothesPage()
+        {
+            driver.Navigate().GoToUrl(baseURL + "/men.html");
+            new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(element => element.FindElement(By.CssSelector("span[class='base'][data-ui-id='page-title-wrapper']")).Text == "Men");
+        }
     }
 }
