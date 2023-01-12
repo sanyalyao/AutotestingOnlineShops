@@ -27,40 +27,56 @@ namespace AutotestingOnlineShops.Luma
                         CategoryTops = new CategoryTops()
                         {
                             Category = GetCategoryTops(sex)
-                        },
-
-                        StyleTops = new StyleTops()
-                        {
-                            Style = GetStyleTops(sex)
-                        },
-
-                        SizeTops = new SizeTops()
-                        {
-                            Size = GetSize(sex)
-                        },
-
-                        ColorTops = new ColorTops()
-                        {
-                            Color = GetColor(sex)
-                        },
-
-                        MaterialTops = new MaterialTops()
-                        {
-                            Material = GetMaterial(sex)
                         }
+
+                        //StyleTops = new StyleTops()
+                        //{
+                        //    Style = GetStyleTops(sex)
+                        //},
+
+                        //SizeTops = new SizeTops()
+                        //{
+                        //    Size = GetSize(sex)
+                        //},
+
+                        //PriceTops = new PriceTops
+                        //{
+                        //    Price = GetPrice(sex)
+                        //},
+
+                        //ColorTops = new ColorTops()
+                        //{
+                        //    Color = GetColor(sex)
+                        //},
+
+                        //MaterialTops = new MaterialTops()
+                        //{
+                        //    Material = GetMaterial(sex)
+                        //},
+
+                        //EcoCollection = "yes",
+
+                        //PerfomanceFabric = "no",
+
+                        //ErinRecommends = "yes",
+
+                        //New = "yes",
+
+                        //Sale  = "no",
+
+                        //PatternTops = new PatternTops()
+                        //{
+                        //    Pattern = GetPattern(sex)
+                        //},
+
+                        //ClimateTops = new ClimateTops()
+                        //{
+                        //    Climate = GetClimate(sex)
+                        //}
                     }
-                    //Style = GetStyleClothes("Woman"),
-                    //Size = GetSize(),
-                    //Price = GetPrice(),
-                    //Color = GetColor(),
-                    //Material = GetMaterial(),
-                    //EcoCollection = GetYesOrNo(),
-                    //PerfomanceFabric = GetYesOrNo(),
-                    //ErinRecommends = GetYesOrNo(),
-                    //Pattern = GetPattern(),
-                    //Climate = GetClimate()
                 }
             };
+            app.Clothes.ChooseOptions(clothes, sex, "tops", "category");
         }
 
         [Test]

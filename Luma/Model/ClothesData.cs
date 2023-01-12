@@ -26,16 +26,16 @@
 
         public StyleTops StyleTops { get; set; }
         public SizeTops SizeTops { get; set; }
-        //public string Price { get; set; }
+        public PriceTops PriceTops { get; set; }
         public ColorTops ColorTops { get; set; }
         public MaterialTops MaterialTops { get; set; }
-        //public string EcoCollection { get; set; }
-        //public string PerfomanceFabric { get; set; }
-        //public string ErinRecommends { get; set; }
-        //public string New { get; set; }
-        //public string Sale { get; set; }
-        //public string Pattern { get; set; }
-        //public string Climate { get; set; }
+        public string EcoCollection { get; set; }
+        public string PerfomanceFabric { get; set; }
+        public string ErinRecommends { get; set; }
+        public string New { get; set; }
+        public string Sale { get; set; }
+        public PatternTops PatternTops { get; set; }
+        public ClimateTops ClimateTops { get; set; }
     }
 
     public class TopsWoman
@@ -44,28 +44,25 @@
 
         public StyleTops StyleTops { get; set; }
         public SizeTops SizeTops { get; set; }
-        //public string Price { get; set; }
+        public PriceTops PriceTops { get; set; }
         public ColorTops ColorTops { get; set; }
         public MaterialTops MaterialTops { get; set; }
-        //public string EcoCollection { get; set; }
-        //public string PerfomanceFabric { get; set; }
-        //public string ErinRecommends { get; set; }
-        //public string New { get; set; }
-        //public string Sale { get; set; }
-        //public string Pattern { get; set; }
-        //public string Climate { get; set; }
+        public string EcoCollection { get; set; }
+        public string PerfomanceFabric { get; set; }
+        public string ErinRecommends { get; set; }
+        public string New { get; set; }
+        public string Sale { get; set; }
+        public PatternTops PatternTops { get; set; }
+        public ClimateTops ClimateTops { get; set; }
     }
 
     //public class BottomsMan
     //{
-    //    [XmlElement(ElementName = "Category")]
     //    public Category Category { get; set; }
     //}
 
-    //[XmlRoot(ElementName = "BottomsWoman")]
     //public class BottomsWoman
     //{
-    //    [XmlElement(ElementName = "Category")]
     //    public Category Category { get; set; }
     //}
 
@@ -86,6 +83,11 @@
         public string Size { get; set; }
     }
 
+    public class PriceTops
+    {
+        public string Price { get; set; }
+    }
+
     public class ColorTops
     {
         public string Color { get; set; }
@@ -94,5 +96,15 @@
     public class MaterialTops
     {
         public string Material { get; set; }
+    }
+
+    public class PatternTops
+    {
+        public string Pattern { get; set; }
+    }
+
+    public class ClimateTops
+    {
+        public string Climate { get; set; }
     }
 }

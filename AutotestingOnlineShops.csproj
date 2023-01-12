@@ -135,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Luma\Appmanager\AccountHelper.cs" />
+    <Compile Include="Luma\Appmanager\ClothesHelper.cs" />
     <Compile Include="Luma\Appmanager\CredentialsHelper.cs" />
     <Compile Include="Luma\Appmanager\LoginHelper.cs" />
     <Compile Include="Luma\Appmanager\Manager.cs" />

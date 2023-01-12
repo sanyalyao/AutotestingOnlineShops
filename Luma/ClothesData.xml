@@ -31,6 +31,16 @@
 				<Size>L</Size>
 				<Size>XL</Size>
 			</SizeTops>
+			<PriceTops>
+				<Price>10.00 - 19.99</Price>
+				<Price>20.00 - 29.99</Price>
+				<Price>30.00 - 39.99</Price>
+				<Price>40.00 - 49.99</Price>
+				<Price>50.00 - 59.99</Price>
+				<Price>60.00 - 69.99</Price>
+				<Price>70.00 - 79.99</Price>
+				<Price>90.00 and above</Price>
+			</PriceTops>
 			<ColorTops>
 				<Color>Black</Color>
 				<Color>Blue</Color>
@@ -47,7 +57,37 @@
 			<MaterialTops>
 				<Material>Cocona® performance fabric</Material>
 				<Material>Cotton</Material>
+				<Material>Fleece</Material>
+				<Material>Hemp</Material>
+				<Material>LumaTech™</Material>
+				<Material>Lycra®</Material>
+				<Material>Nylon</Material>
+				<Material>Polyester</Material>
+				<Material>Rayon</Material>
+				<Material>Spandex</Material>
+				<Material>HeatTec®</Material>
+				<Material>EverCool™</Material>
+				<Material>Organic Cotton</Material>
+				<Material>CoolTech™</Material>
+				<Material>Wool</Material>
 			</MaterialTops>
+			<PatternTops>
+				<Pattern>Color-Blocked</Pattern>
+				<Pattern>Solid</Pattern>
+				<Pattern>Striped</Pattern>
+			</PatternTops>
+			<ClimateTops>
+				<Climate>All-Weather</Climate>
+				<Climate>Cold</Climate>
+				<Climate>Cool</Climate>
+				<Climate>Indoor</Climate>
+				<Climate>Mild</Climate>
+				<Climate>Rainy</Climate>
+				<Climate>Spring</Climate>
+				<Climate>Warm</Climate>
+				<Climate>Windy</Climate>
+				<Climate>Wintry</Climate>
+			</ClimateTops>
 		</TopsMan>
 		<BottomsMan>
 			<CategoryBottoms>
@@ -61,9 +101,9 @@
 		<TopsWoman>
 			<CategoryTops>
 				<Category>Jackets</Category>
-				<Category>Hoodies and Sweatshirts</Category>
+				<Category>Hoodies &amp; Sweatshirts</Category>
 				<Category>Tees</Category>
-				<Category>Bras and Tanks</Category>
+				<Category>Bras &amp; Tanks</Category>
 			</CategoryTops>
 			<StyleTops>
 				<Style>Insulated</Style>
@@ -92,6 +132,15 @@
 				<Size>L</Size>
 				<Size>XL</Size>
 			</SizeTops>
+			<PriceTops>
+				<Price>20.00 - 29.99</Price>
+				<Price>30.00 - 39.99</Price>
+				<Price>40.00 - 49.99</Price>
+				<Price>50.00 - 59.99</Price>
+				<Price>60.00 - 69.99</Price>
+				<Price>70.00 - 79.99</Price>
+				<Price>80.00 and above</Price>
+			</PriceTops>
 			<ColorTops>
 				<Color>Black</Color>
 				<Color>Blue</Color>
@@ -104,6 +153,44 @@
 				<Color>White</Color>
 				<Color>Yellow</Color>
 			</ColorTops>
+			<MaterialTops>
+				<Material>Cocona® performance fabric</Material>
+				<Material>Cotton</Material>
+				<Material>Fleece</Material>
+				<Material>Hemp</Material>
+				<Material>Jersey</Material>
+				<Material>LumaTech™</Material>
+				<Material>Mesh</Material>
+				<Material>Lycra®</Material>
+				<Material>Nylon</Material>
+				<Material>Microfiber</Material>
+				<Material>Polyester</Material>
+				<Material>Spandex</Material>
+				<Material>HeatTec®</Material>
+				<Material>EverCool™</Material>
+				<Material>Organic Cotton</Material>
+				<Material>TENCEL</Material>
+				<Material>CoolTech™</Material>
+				<Material>Wool</Material>
+			</MaterialTops>
+			<PatternTops>
+				<Pattern>Checked</Pattern>
+				<Pattern>Color-Blocked</Pattern>
+				<Pattern>Solid</Pattern>
+				<Pattern>Striped</Pattern>
+			</PatternTops>
+			<ClimateTops>
+				<Climate>All-Weather</Climate>
+				<Climate>Cold</Climate>
+				<Climate>Cool</Climate>
+				<Climate>Indoor</Climate>
+				<Climate>Mild</Climate>
+				<Climate>Rainy</Climate>
+				<Climate>Spring</Climate>
+				<Climate>Warm</Climate>
+				<Climate>Windy</Climate>
+				<Climate>Wintry</Climate>
+			</ClimateTops>
 		</TopsWoman>
 		<BottomsWoman>
 			<CategoryBottoms>

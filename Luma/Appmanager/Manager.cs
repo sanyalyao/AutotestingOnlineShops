@@ -9,10 +9,12 @@ namespace AutotestingOnlineShops.Luma
     {
         protected IWebDriver driver;
         protected string baseURL;
+        protected string womenTopsURL;
         protected NavigationHelper navigationHelper;
         protected LoginHelper loginHelper;
         protected AccountHelper accountHelper;
         protected CredentialsHelper credentialsHelper;
+        protected ClothesHelper clothesHelper;
         private static ThreadLocal<Manager> app = new ThreadLocal<Manager>();
 
 
@@ -21,10 +23,12 @@ namespace AutotestingOnlineShops.Luma
             driver = new FirefoxDriver();
             driver.Manage().Window.Maximize();
             baseURL = "https://magento.softwaretestingboard.com";
+            womenTopsURL = "/women/tops-women.html";
             navigationHelper = new NavigationHelper(this, baseURL);
             loginHelper = new LoginHelper(this, baseURL);
             accountHelper = new AccountHelper(this);
             credentialsHelper = new CredentialsHelper(this);
+            clothesHelper = new ClothesHelper(this, baseURL, womenTopsURL);
             // helpers below
         }
 
@@ -88,6 +92,14 @@ namespace AutotestingOnlineShops.Luma
             get
             {
                 return credentialsHelper;
+            }
+        }
+
+        public ClothesHelper Clothes
+        {
+            get
+            {
+                return clothesHelper;
             }
         }
     }
