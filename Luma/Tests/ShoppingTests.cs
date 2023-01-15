@@ -24,15 +24,15 @@ namespace AutotestingOnlineShops.Luma
                 {
                     TopsWoman = new TopsWoman
                     {
-                        CategoryTops = new CategoryTops()
-                        {
-                            Category = GetCategoryTops(sex)
-                        }
-
-                        //StyleTops = new StyleTops()
+                        //CategoryTops = new CategoryTops()
                         //{
-                        //    Style = GetStyleTops(sex)
+                        //    Category = GetCategoryTops(sex)
                         //},
+
+                        StyleTops = new StyleTops()
+                        {
+                            Style = GetStyleTops(sex)
+                        }
 
                         //SizeTops = new SizeTops()
                         //{
@@ -76,7 +76,7 @@ namespace AutotestingOnlineShops.Luma
                     }
                 }
             };
-            app.Clothes.ChooseOptions(clothes, sex, "tops", "category");
+            app.Clothes.ChooseSingleOption(clothes, sex, "tops", "style");
         }
 
         [Test]

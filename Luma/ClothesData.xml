@@ -18,7 +18,7 @@
 				<Style>Hard Shell</Style>
 				<Style>Soft Shell</Style>
 				<Style>Windbreaker</Style>
-				<Style>zip</Style>
+				<!--Style>zip</Style-->
 				<Style>Full Zip</Style>
 				<Style>Reversible</Style>
 				<Style>Tank</Style>
@@ -32,14 +32,14 @@
 				<Size>XL</Size>
 			</SizeTops>
 			<PriceTops>
-				<Price>10.00 - 19.99</Price>
-				<Price>20.00 - 29.99</Price>
-				<Price>30.00 - 39.99</Price>
-				<Price>40.00 - 49.99</Price>
-				<Price>50.00 - 59.99</Price>
-				<Price>60.00 - 69.99</Price>
-				<Price>70.00 - 79.99</Price>
-				<Price>90.00 and above</Price>
+				<Price>$10.00 - $19.99</Price>
+				<Price>$20.00 - $29.99</Price>
+				<Price>$30.00 - $39.99</Price>
+				<Price>$40.00 - $49.99</Price>
+				<Price>$50.00 - $59.99</Price>
+				<Price>$60.00 - $69.99</Price>
+				<Price>$70.00 - $79.99</Price>
+				<Price>$90.00 and above</Price>
 			</PriceTops>
 			<ColorTops>
 				<Color>Black</Color>
@@ -94,6 +94,73 @@
 				<Category>Pants</Category>
 				<Category>Shorts</Category>
 			</CategoryBottoms>
+			<StyleBottoms>
+				<Style>Base Layer</Style>
+				<Style>Compression</Style>
+				<Style>Leggings</Style>
+				<Style>Sweatpants</Style>
+				<Style>Tights</Style>
+				<Style>Track Pants</Style>
+				<Style>Workout Pants</Style>
+			</StyleBottoms>
+			<SizeBottoms>
+				<Size>32</Size>
+				<Size>33</Size>
+				<Size>34</Size>
+				<Size>36</Size>
+			</SizeBottoms>
+			<PriceBottoms>
+				<Price>$20.00 - $29.99</Price>
+				<Price>$30.00 - $39.99</Price>
+				<Price>$40.00 - $49.99</Price>
+				<Price>$50.00 - $59.99</Price>
+				<Price>$60.00 and above</Price>
+			</PriceBottoms>
+			<ColorBottoms>
+				<Color>Black</Color>
+				<Color>Blue</Color>
+				<Color>Brown</Color>
+				<Color>Gray</Color>
+				<Color>Green</Color>
+				<Color>Orange</Color>
+				<Color>Purple</Color>
+				<Color>Red</Color>
+				<Color>Yellow</Color>
+			</ColorBottoms>
+			<MaterialBottoms>
+				<Material>Cocona® performance fabric</Material>
+				<Material>Cotton</Material>
+				<Material>Fleece</Material>
+				<Material>Hemp</Material>
+				<Material>LumaTech™</Material>
+				<Material>Mesh</Material>
+				<Material>Lycra®</Material>
+				<Material>Nylon</Material>
+				<Material>Polyester</Material>
+				<Material>Rayon</Material>
+				<Material>Spandex</Material>
+				<Material>Organic Cotton</Material>
+				<Material>CoolTech™</Material>
+				<Material>Linen</Material>
+				<Material>Wool</Material>
+			</MaterialBottoms>
+			<PatternBottoms>
+				<Pattern>Solid</Pattern>
+				<Pattern>Striped</Pattern>
+			</PatternBottoms>
+			<ClimateBottoms>
+				<Climate>All-Weather</Climate>
+				<Climate>Cold</Climate>
+				<Climate>Cool</Climate>
+				<Climate>Indoor</Climate>
+				<Climate>Mild</Climate>
+				<Climate>Rainy</Climate>
+				<Climate>Spring</Climate>
+				<Climate>Warm</Climate>
+				<Climate>Windy</Climate>
+				<Climate>Wintry</Climate>
+				<Climate>Hot</Climate>
+			</ClimateBottoms>
 		</BottomsMan>
 	</MenClothes>
 	
@@ -115,7 +182,7 @@
 				<Style>Hard Shell</Style>
 				<Style>Soft Shell</Style>
 				<Style>Windbreaker</Style>
-				<Style>zip</Style>
+				<!--Style>zip</Style-->
 				<Style>Full Zip</Style>
 				<Style>Reversible</Style>
 				<Style>Bra</Style>
@@ -133,13 +200,13 @@
 				<Size>XL</Size>
 			</SizeTops>
 			<PriceTops>
-				<Price>20.00 - 29.99</Price>
-				<Price>30.00 - 39.99</Price>
-				<Price>40.00 - 49.99</Price>
-				<Price>50.00 - 59.99</Price>
-				<Price>60.00 - 69.99</Price>
-				<Price>70.00 - 79.99</Price>
-				<Price>80.00 and above</Price>
+				<Price>$20.00 - $29.99</Price>
+				<Price>$30.00 - $39.99</Price>
+				<Price>$40.00 - $49.99</Price>
+				<Price>$50.00 - $59.99</Price>
+				<Price>$60.00 - $69.99</Price>
+				<Price>$70.00 - $79.99</Price>
+				<Price>$80.00 and above</Price>
 			</PriceTops>
 			<ColorTops>
 				<Color>Black</Color>
@@ -197,6 +264,73 @@
 				<Category>Pants</Category>
 				<Category>Shorts</Category>
 			</CategoryBottoms>
+			<StyleBottoms>
+				<Style>Base Layer</Style>
+				<Style>Basic</Style>
+				<Style>Capri</Style>
+				<Style>Compression</Style>
+				<Style>Leggings</Style>
+				<Style>Parachute</Style>
+				<Style>Snug</Style>
+				<Style>Sweatpants</Style>
+				<Style>Track Pants</Style>
+			</StyleBottoms>
+			<SizeBottoms>
+				<Size>28</Size>
+				<Size>29</Size>
+				<Size>30</Size>
+				<Size>31</Size>
+				<Size>32</Size>
+			</SizeBottoms>
+			<PriceBottoms>
+				<Price>$20.00 - $29.99</Price>
+				<Price>$30.00 - $39.99</Price>
+				<Price>$40.00 - $49.99</Price>
+				<Price>$50.00 - $59.99</Price>
+				<Price>$60.00 and above</Price>
+			</PriceBottoms>
+			<ColorBottoms>
+				<Color>Black</Color>
+				<Color>Blue</Color>
+				<Color>Gray</Color>
+				<Color>Green</Color>
+				<Color>Orange</Color>
+				<Color>Purple</Color>
+				<Color>Red</Color>
+				<Color>White</Color>
+				<Color>Yellow</Color>
+			</ColorBottoms>
+			<MaterialBottoms>
+				<Material>Cocona® performance fabric</Material>
+				<Material>Cotton</Material>
+				<Material>LumaTech™</Material>
+				<Material>Mesh</Material>
+				<Material>Lycra®</Material>
+				<Material>Nylon</Material>
+				<Material>Microfiber</Material>
+				<Material>Polyester</Material>
+				<Material>Rayon</Material>
+				<Material>Spandex</Material>
+				<Material>Organic Cotton</Material>
+				<Material>CoolTech™</Material>
+				<Material>Wool</Material>
+			</MaterialBottoms>
+			<PatternBottoms>
+				<Pattern>Color-Blocked</Pattern>
+				<Pattern>Graphic Print</Pattern>
+				<Pattern>Solid</Pattern>
+				<Pattern>Solid-Highlight</Pattern>
+				<Pattern>Striped</Pattern>
+			</PatternBottoms>
+			<ClimateBottoms>
+				<Climate>All-Weather</Climate>
+				<Climate>Cool</Climate>
+				<Climate>Indoor</Climate>
+				<Climate>Mild</Climate>
+				<Climate>Spring</Climate>
+				<Climate>Warm</Climate>
+				<Climate>Hot</Climate>
+			</ClimateBottoms>
 		</BottomsWoman>
 	</WomenClothes>
 </ClothesData>
