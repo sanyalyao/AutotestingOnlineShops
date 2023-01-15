@@ -93,19 +93,16 @@
     public class CategoryTops
     {
         public string Category { get; set; }
-
     }
 
     public class CategoryBottoms
     {
         public string Category { get; set; }
-
     }
 
     public class StyleTops
     {
         public string Style { get; set; }
-
     }
 
     public class StyleBottoms
