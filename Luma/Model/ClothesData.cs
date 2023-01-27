@@ -30,7 +30,7 @@
         public ColorTops ColorTops { get; set; }
         public MaterialTops MaterialTops { get; set; }
         public string EcoCollection { get; set; }
-        public string PerfomanceFabric { get; set; }
+        public string PerformanceFabric { get; set; }
         public string ErinRecommends { get; set; }
         public string New { get; set; }
         public string Sale { get; set; }
@@ -47,7 +47,7 @@
         public ColorTops ColorTops { get; set; }
         public MaterialTops MaterialTops { get; set; }
         public string EcoCollection { get; set; }
-        public string PerfomanceFabric { get; set; }
+        public string PerformanceFabric { get; set; }
         public string ErinRecommends { get; set; }
         public string New { get; set; }
         public string Sale { get; set; }
@@ -64,7 +64,7 @@
         public ColorBottoms ColorBottoms { get; set; }
         public MaterialBottoms MaterialBottoms { get; set; }
         public string EcoCollection { get; set; }
-        public string PerfomanceFabric { get; set; }
+        public string PerformanceFabric { get; set; }
         public string ErinRecommends { get; set; }
         public string New { get; set; }
         public string Sale { get; set; }
@@ -81,7 +81,7 @@
         public ColorBottoms ColorBottoms { get; set; }
         public MaterialBottoms MaterialBottoms { get; set; }
         public string EcoCollection { get; set; }
-        public string PerfomanceFabric { get; set; }
+        public string PerformanceFabric { get; set; }
         public string ErinRecommends { get; set; }
         public string New { get; set; }
         public string Sale { get; set; }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace AutotestingOnlineShops.Luma
 {
@@ -37,37 +38,37 @@ namespace AutotestingOnlineShops.Luma
                         //SizeTops = new SizeTops()
                         //{
                         //    Size = GetSize(sex)
-                        //},
+                        //}
 
                         //PriceTops = new PriceTops
                         //{
                         //    Price = GetPrice(sex)
-                        //},
+                        //}
 
                         //ColorTops = new ColorTops()
                         //{
                         //    Color = GetColor(sex)
-                        //},
+                        //}
 
                         //MaterialTops = new MaterialTops()
                         //{
                         //    Material = GetMaterial(sex)
-                        //},
+                        //}
 
-                        //EcoCollection = "yes",
+                        //EcoCollection = "no"
 
-                        //PerfomanceFabric = "no",
+                        //PerformanceFabric = "yes" 
 
-                        //ErinRecommends = "yes",
+                        //ErinRecommends = "no"
 
-                        //New = "yes",
+                        //New = "yes"
 
-                        //Sale  = "no",
+                        //Sale = "no"
 
                         //PatternTops = new PatternTops()
                         //{
                         //    Pattern = GetPattern(sex)
-                        //},
+                        //}
 
                         //ClimateTops = new ClimateTops()
                         //{
@@ -77,6 +78,9 @@ namespace AutotestingOnlineShops.Luma
                 }
             };
             app.Clothes.ChooseSingleOption(clothes, sex, "tops", "category");
+            int countOfClothes = app.Clothes.GetCountOfClothes();
+            int countOfClothesFromToolbar =  app.Clothes.GetCountOfItemsFromToolbar();
+            Assert.AreEqual(countOfClothes, countOfClothesFromToolbar);
         }
 
         [Test]

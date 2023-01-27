@@ -36,7 +36,6 @@ namespace AutotestingOnlineShops.Luma
                                 {
                                     driver.Navigate().GoToUrl(baseURL + womenTopsURL);
                                     new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(element => element.FindElement(By.CssSelector("span[class='base'][data-ui-id='page-title-wrapper']")).Text == "Tops");
-                                    new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(element => element.FindElement(By.CssSelector("div[data-role='title'][class='filter-options-title']")).GetAttribute("aria-selected") == "false");
                                     break;
                                 }
                         }
@@ -82,9 +81,9 @@ namespace AutotestingOnlineShops.Luma
             {
                 ChooseEcoCollection(clothes, sex, option, typeOfClothes);
             }
-            if (option.ToLower() == "perfomance fabric")
+            if (option.ToLower() == "performance fabric")
             {
-                ChoosePerfomanceFabric(clothes, sex, option, typeOfClothes);
+                ChoosePerformanceFabric(clothes, sex, option, typeOfClothes);
             }
             if (option.ToLower() == "erin recommends") 
             {
@@ -108,9 +107,49 @@ namespace AutotestingOnlineShops.Luma
             }
         }
 
+        // get count of clothes after choosing some shopping option
+        public int GetCountOfClothes()
+        {
+            if (driver.FindElement(By.Id("toolbar-amount")).Text.Contains("of")) // if more than one page of products
+            {
+                IWebElement productsGrid = driver.FindElement(By.CssSelector("div[class='products wrapper grid products-grid']")).FindElement(By.CssSelector("ol[class='products list items product-items']"));
+                List<IWebElement> listOfProducts = productsGrid.FindElements(By.CssSelector("li[class='item product product-item']")).ToList();
+                do
+                {
+                    driver.FindElements(By.CssSelector("a[class='action  next']"))[1].Click();
+                    IWebElement anotherProductsGrid = driver.FindElement(By.CssSelector("div[class='products wrapper grid products-grid']")).FindElement(By.CssSelector("ol[class='products list items product-items']"));
+                    List<IWebElement> newListOfProducts = anotherProductsGrid.FindElements(By.CssSelector("li[class='item product product-item']")).ToList();
+                    listOfProducts.AddRange(newListOfProducts);
+                    Thread.Sleep(5);
+                }
+                while (driver.FindElements(By.CssSelector("a[class='action  next']")).Count != 0);
+                return listOfProducts.Count;
+            }
+            else // if one page of products
+            {
+                IWebElement productsGrid = driver.FindElement(By.CssSelector("div[class='products wrapper grid products-grid']")).FindElement(By.CssSelector("ol[class='products list items product-items']"));
+                List<IWebElement> listOfProducts = productsGrid.FindElements(By.CssSelector("li[class='item product product-item']")).ToList();
+                return listOfProducts.Count();
+            }
+        }
+
+        // get count of clothes from toolbar after choosing some shopping option
+        public int GetCountOfItemsFromToolbar()
+        {
+            if (driver.FindElement(By.Id("toolbar-amount")).Text.Contains("of"))
+            {
+                return Int32.Parse(driver.FindElement(By.Id("toolbar-amount")).Text.Split( new string[] { "of" }, StringSplitOptions.None)[1]);
+            }
+            else
+            {
+                return Int32.Parse(driver.FindElement(By.Id("toolbar-amount")).FindElement(By.ClassName("toolbar-number")).Text);
+            }
+        }
+
         private void WaitCollapsedList(string option)
         {
-            Thread.Sleep(15); // wait because when you open page, menu of shopping options is not collapsed. after several seconds it will be collapsed automatically
+            new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(element => element.FindElement(By.CssSelector("div[data-role='title'][class='filter-options-title']")).GetAttribute("aria-selected") == "false"); // wait because when you open page, menu of shopping options is not collapsed. after several seconds it will be collapsed automatically
+
             GetShoppingOptions().Where(element => element.FindElement(By.ClassName("filter-options-title")).Text.ToLower() == option.ToLower()).First().Click();
         }
 
@@ -187,7 +226,7 @@ namespace AutotestingOnlineShops.Luma
                 if (typeOfClothes.ToLower() == "tops")
                 {
                     string size = clothes.WomenClothes.TopsWoman.SizeTops.Size.ToLower();
-                    ClickOption(option, size);
+                    ClickSize(option, size);
                 }
                 if (typeOfClothes.ToLower() == "bottoms")
                 {
@@ -334,19 +373,19 @@ namespace AutotestingOnlineShops.Luma
             }
         }
 
-        private void ChoosePerfomanceFabric(ClothesData clothes, string sex, string option, string typeOfClothes)
+        private void ChoosePerformanceFabric(ClothesData clothes, string sex, string option, string typeOfClothes)
         {
             WaitCollapsedList(option);
             if (sex.ToLower() == "female")
             {
                 if (typeOfClothes.ToLower() == "tops")
                 {
-                    string perfomanceFabric = clothes.WomenClothes.TopsWoman.PerfomanceFabric.ToLower();
+                    string perfomanceFabric = clothes.WomenClothes.TopsWoman.PerformanceFabric.ToLower();
                     ClickOption(option, perfomanceFabric);
                 }
                 if (typeOfClothes.ToLower() == "bottoms")
                 {
-                    string perfomanceFabric = clothes.WomenClothes.BottomsWoman.PerfomanceFabric.ToLower();
+                    string perfomanceFabric = clothes.WomenClothes.BottomsWoman.PerformanceFabric.ToLower();
                     ClickOption(option, perfomanceFabric);
                 }
             }
@@ -354,12 +393,12 @@ namespace AutotestingOnlineShops.Luma
             {
                 if (typeOfClothes.ToLower() == "tops")
                 {
-                    string perfomanceFabric = clothes.MenClothes.TopsMan.PerfomanceFabric.ToLower();
+                    string perfomanceFabric = clothes.MenClothes.TopsMan.PerformanceFabric.ToLower();
                     ClickOption(option, perfomanceFabric);
                 }
                 if (typeOfClothes.ToLower() == "bottoms")
                 {
-                    string perfomanceFabric = clothes.MenClothes.BottomsMan.PerfomanceFabric.ToLower();
+                    string perfomanceFabric = clothes.MenClothes.BottomsMan.PerformanceFabric.ToLower();
                     ClickOption(option, perfomanceFabric);
                 }
             }
@@ -372,12 +411,12 @@ namespace AutotestingOnlineShops.Luma
             {
                 if (typeOfClothes.ToLower() == "tops")
                 {
-                    string erinRecommends = clothes.WomenClothes.TopsWoman.PerfomanceFabric.ToLower();
+                    string erinRecommends = clothes.WomenClothes.TopsWoman.ErinRecommends.ToLower();
                     ClickOption(option, erinRecommends);
                 }
                 if (typeOfClothes.ToLower() == "bottoms")
                 {
-                    string erinRecommends = clothes.WomenClothes.BottomsWoman.PerfomanceFabric.ToLower();
+                    string erinRecommends = clothes.WomenClothes.BottomsWoman.ErinRecommends.ToLower();
                     ClickOption(option, erinRecommends);
                 }
             }
@@ -385,12 +424,12 @@ namespace AutotestingOnlineShops.Luma
             {
                 if (typeOfClothes.ToLower() == "tops")
                 {
-                    string erinRecommends = clothes.MenClothes.TopsMan.PerfomanceFabric.ToLower();
+                    string erinRecommends = clothes.MenClothes.TopsMan.ErinRecommends.ToLower();
                     ClickOption(option, erinRecommends);
                 }
                 if (typeOfClothes.ToLower() == "bottoms")
                 {
-                    string erinRecommends = clothes.MenClothes.BottomsMan.PerfomanceFabric.ToLower();
+                    string erinRecommends = clothes.MenClothes.BottomsMan.ErinRecommends.ToLower();
                     ClickOption(option, erinRecommends);
                 }
             }
@@ -520,14 +559,49 @@ namespace AutotestingOnlineShops.Luma
             }
         }
 
-        private void ClickOption(string option, string kindOfOptions)
+        private void ClickOption(string option, string valueFromOption)
         {
-            IWebElement itemsElement = GetShoppingOptions().Where(element => element.FindElement(By.ClassName("filter-options-title")).Text.ToLower() == option.ToLower()).First().FindElement(By.CssSelector("ol[class='items']")); // list of items with links for each category
+            if (option.ToLower() != "color")
+            {
+                IWebElement itemsElement = GetShoppingOptions().Where(element => element.FindElement(By.ClassName("filter-options-title")).Text.ToLower() == option.ToLower()).First().FindElement(By.CssSelector("ol[class='items']")); // list of items with links for each category
+                if (option.ToLower() == "price")
+                {
+                    var itemsWithPrices = itemsElement.FindElements(By.CssSelector("li[class='item']")).Select(element => element.FindElement(By.TagName("a")).FindElements(By.CssSelector("span[class='price']"))).ToList();
+                    IWebElement selectedPrice = null;
+                    // choose the price
+                    for (int i = 0; i < itemsWithPrices.Count(); i++)
+                    {
+                        for (int y = 0; y < itemsWithPrices[i].Count() - 1; y++)
+                        {
+                            if ($"{itemsWithPrices[i][y].Text} - {itemsWithPrices[i][y + 1].Text}" == valueFromOption)
+                            {
+                                selectedPrice = itemsWithPrices[i][y];
+                            }
+                        }
+                    }
+                    selectedPrice.Click(); // click item with link for choosen category
+                }
+                else
+                {
+                    itemsElement.FindElements(By.CssSelector("li[class='item']")).Where(element => Regex.Split(element.FindElement(By.TagName("a")).Text.ToLower(), @"\d")[0].Trim() == valueFromOption).First().FindElement(By.TagName("a")).Click(); // click item with link for choosen category
+                }
+            }
+            if (option.ToLower() == "color")
+            {
+                IWebElement itemsElement = GetShoppingOptions().Where(element => element.FindElement(By.ClassName("filter-options-title")).Text.ToLower() == option.ToLower()).First().FindElement(By.CssSelector("div[class='swatch-attribute swatch-layered color']")); // list of colors
 
-            itemsElement.FindElements(By.CssSelector("li[class='item']")).Where(element => Regex.Split(element.FindElement(By.TagName("a")).Text.ToLower(), @"\d")[0].Trim() == kindOfOptions).First().FindElement(By.TagName("a")).Click(); // click item with link for choosen category
+                ICollection<IWebElement> webElementsColors = itemsElement.FindElement(By.CssSelector("div[class='swatch-attribute-options clearfix']")).FindElements(By.TagName("a")); // list of items with links
 
+                webElementsColors.Where(element => element.FindElement(By.TagName("div")).GetAttribute("option-label").ToLower() == valueFromOption.ToLower()).First().FindElement(By.TagName("div")).Click(); // click choosen color
+            }
             // wait
-            new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(element => element.FindElement(By.ClassName("filter-current")).FindElements(By.CssSelector("li[class='item']")).Where(item => item.FindElement(By.ClassName("filter-value")).Text.ToLower() == kindOfOptions));
+            new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(element => element.FindElement(By.ClassName("filter-current")).FindElements(By.CssSelector("li[class='item']")).Where(item => item.FindElement(By.ClassName("filter-value")).Text.ToLower() == valueFromOption));
+        }
+
+        private void ClickSize(string option, string kindOfOptions)
+        {
+            IWebElement itemsElement = GetShoppingOptions().Where(element => element.FindElement(By.ClassName("filter-options-title")).Text.ToLower() == option.ToLower()).First().FindElement(By.CssSelector("div[class='swatch-attribute-options clearfix']")); // list of items with links for each category
+            itemsElement.FindElements(By.TagName("a")).Where(element => element.GetAttribute("aria-label").ToLower().Trim() == kindOfOptions).First().FindElement(By.TagName("div")).Click();  // click item with link for choosen category
         }
     }
 }
