@@ -3,7 +3,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System.Linq;
 using System.Collections.Generic;
-using OpenQA.Selenium.Interactions;
 using System.Text.RegularExpressions;
 using System.Threading;
 
@@ -13,6 +12,7 @@ namespace AutotestingOnlineShops.Luma
     {
         private string baseURL;
         private string womenTopsURL;
+        private Random rnd = new Random();
 
         public ClothesHelper(Manager manager, string baseURL, string womenTopsURL) : base(manager)
         {
@@ -144,6 +144,28 @@ namespace AutotestingOnlineShops.Luma
             {
                 return Int32.Parse(driver.FindElement(By.Id("toolbar-amount")).FindElement(By.ClassName("toolbar-number")).Text);
             }
+        }
+
+        public void AddClothesToCart()
+        {
+            IWebElement productsGrid = driver.FindElement(By.CssSelector("div[class='products wrapper grid products-grid']")).FindElement(By.CssSelector("ol[class='products list items product-items']"));
+            List<IWebElement> listOfProducts = productsGrid.FindElements(By.CssSelector("li[class='item product product-item']")).ToList();
+            IWebElement product = listOfProducts[rnd.Next(listOfProducts.Count())].FindElement(By.ClassName("product-item-info")); // get product info like sizes and colors
+
+            IWebElement chechIfChoosenSize = product.FindElement(By.CssSelector("div[class='swatch-attribute size']")).FindElements(By.CssSelector("div[class='swatch-option text']")).Where(element => element.GetAttribute("aria-checked") == "true").DefaultIfEmpty(null).First(); // check if size is already choosen
+
+            IWebElement checkIfChoosenColor = product.FindElement(By.CssSelector("div[class='swatch-attribute color']")).FindElements(By.CssSelector("div[class='swatch-option color']")).Where(element => element.GetAttribute("aria-checked") == "true").DefaultIfEmpty(null).First(); // check if color is already choosen
+            // if size is not choosen, so choose one
+            if (chechIfChoosenSize == null)
+            {
+                product.FindElement(By.CssSelector("div[class='swatch-attribute size']")).FindElement(By.CssSelector("div[class='swatch-option text']")).Click();
+            }
+            // if color is not choosen, so choose one
+            if (checkIfChoosenColor == null)
+            {
+                product.FindElement(By.CssSelector("div[class='swatch-attribute color']")).FindElement(By.CssSelector("div[class='swatch-option color']")).Click();
+            }
+            product.FindElement(By.CssSelector("button[type='submit'][title='Add to Cart']")).Click();
         }
 
         private void WaitCollapsedList(string option)

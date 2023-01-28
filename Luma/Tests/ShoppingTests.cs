@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
-using OpenQA.Selenium;
+﻿using NUnit.Framework;
 
 namespace AutotestingOnlineShops.Luma
 {
@@ -81,6 +77,7 @@ namespace AutotestingOnlineShops.Luma
             int countOfClothes = app.Clothes.GetCountOfClothes();
             int countOfClothesFromToolbar =  app.Clothes.GetCountOfItemsFromToolbar();
             Assert.AreEqual(countOfClothes, countOfClothesFromToolbar);
+            app.Clothes.AddClothesToCart();
         }
 
         [Test]
