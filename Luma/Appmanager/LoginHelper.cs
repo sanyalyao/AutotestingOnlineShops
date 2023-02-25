@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Threading;
 
 namespace AutotestingOnlineShops.Luma
 {
@@ -43,11 +44,12 @@ namespace AutotestingOnlineShops.Luma
                 return false;
             }
         }
-        private void LogOut()
+        public void LogOut()
         {
-            driver.FindElement(By.CssSelector("button[class='action switch'][data-action='customer-menu-toggle']")).Click();
-            driver.FindElement(By.CssSelector("div[class='customer-menu'][data-target='dropdown']")).FindElement(By.LinkText("Sign Out")).Click();
-            new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(element => element.Url == baseURL);
+            Thread.Sleep(10000);
+            driver.FindElement(By.ClassName("customer-welcome")).FindElement(By.ClassName("customer-name")).FindElement(By.TagName("button")).Click();
+            driver.FindElement(By.ClassName("authorization-link")).FindElement(By.LinkText("Sign Out")).Click();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(element => element.FindElement(By.Id("ui-id-3")).Text == "What's New");
         }
     }
 }

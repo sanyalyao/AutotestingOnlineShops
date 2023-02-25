@@ -148,6 +148,7 @@
     <Compile Include="Luma\Tests\CreationAccountTests.cs" />
     <Compile Include="Luma\Tests\EditAddresses.cs" />
     <Compile Include="Luma\Tests\LoginTests.cs" />
+    <Compile Include="Luma\Tests\LogoutTests.cs" />
     <Compile Include="Luma\Tests\ModificationAccountTests.cs" />
     <Compile Include="Luma\Tests\ShoppingTests.cs" />
     <Compile Include="Luma\Tests\TestBase.cs" />

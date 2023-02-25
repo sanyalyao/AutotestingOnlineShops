@@ -6,13 +6,47 @@ namespace AutotestingOnlineShops.Luma
     public class ShoppingTests : AuthTestBase
     {
         [Test]
-        public void BuyManClothes()
+        public void BuyManBottoms()
         {
-
+            string sex = "Male";
+            ClothesData clothes = new ClothesData()
+            {
+                MenClothes = new MenClothes
+                {
+                    BottomsMan = new BottomsMan
+                    {
+                        CategoryBottoms = new CategoryBottoms()
+                        {
+                            Category = GetCategoryBottoms(sex)
+                        }
+                    }
+                }
+            };
+            app.Clothes.BuyClothes(clothes, sex, "bottoms", "category");
         }
 
         [Test]
-        public void BuyWomanClothes()
+        public void BuyManTops()
+        {
+            string sex = "Male";
+            ClothesData clothes = new ClothesData()
+            {
+                MenClothes = new MenClothes
+                {
+                    TopsMan = new TopsMan
+                    {
+                        CategoryTops = new CategoryTops()
+                        {
+                            Category = GetCategoryTops(sex)
+                        }
+                    }
+                }
+            };
+            app.Clothes.BuyClothes(clothes, sex, "tops", "category");
+        }
+
+        [Test]
+        public void BuyWomanTops()
         {
             string sex = "Female";
             ClothesData clothes = new ClothesData()
@@ -25,59 +59,50 @@ namespace AutotestingOnlineShops.Luma
                         {
                             Category = GetCategoryTops(sex)
                         }
-
-                        //StyleTops = new StyleTops()
-                        //{
-                        //    Style = GetStyleTops(sex)
-                        //}
-
-                        //SizeTops = new SizeTops()
-                        //{
-                        //    Size = GetSize(sex)
-                        //}
-
-                        //PriceTops = new PriceTops
-                        //{
-                        //    Price = GetPrice(sex)
-                        //}
-
-                        //ColorTops = new ColorTops()
-                        //{
-                        //    Color = GetColor(sex)
-                        //}
-
-                        //MaterialTops = new MaterialTops()
-                        //{
-                        //    Material = GetMaterial(sex)
-                        //}
-
-                        //EcoCollection = "no"
-
-                        //PerformanceFabric = "yes" 
-
-                        //ErinRecommends = "no"
-
-                        //New = "yes"
-
-                        //Sale = "no"
-
-                        //PatternTops = new PatternTops()
-                        //{
-                        //    Pattern = GetPattern(sex)
-                        //}
-
-                        //ClimateTops = new ClimateTops()
-                        //{
-                        //    Climate = GetClimate(sex)
-                        //}
                     }
                 }
             };
-            app.Clothes.ChooseSingleOption(clothes, sex, "tops", "category");
-            int countOfClothes = app.Clothes.GetCountOfClothes();
-            int countOfClothesFromToolbar =  app.Clothes.GetCountOfItemsFromToolbar();
-            Assert.AreEqual(countOfClothes, countOfClothesFromToolbar);
-            app.Clothes.AddClothesToCart();
+            app.Clothes.BuyClothes(clothes, sex, "tops", "category");
+        }
+
+        [Test]
+        public void BuyWomanBottoms()
+        {
+            string sex = "Female";
+            ClothesData clothes = new ClothesData()
+            {
+                WomenClothes = new WomenClothes
+                {
+                    BottomsWoman = new BottomsWoman
+                    {
+                        CategoryBottoms = new CategoryBottoms()
+                        {
+                            Category = GetCategoryBottoms(sex)
+                        }
+                    }
+                }
+            };
+            app.Clothes.BuyClothes(clothes, sex, "bottoms", "category");
+        }
+
+        [Test]
+        public void BuyManTopsByStyle()
+        {
+            string sex = "Male";
+            ClothesData clothes = new ClothesData()
+            {
+                MenClothes = new MenClothes
+                {
+                    TopsMan = new TopsMan
+                    {
+                        StyleTops = new StyleTops()
+                        {
+                            Style = GetStyleTops(sex)
+                        }
+                    }
+                }
+            };
+            app.Clothes.BuyClothes(clothes, sex, "tops", "style");
         }
 
         [Test]

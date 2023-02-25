@@ -5,19 +5,20 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading;
+using NUnit.Framework;
 
 namespace AutotestingOnlineShops.Luma
 {
     public class ClothesHelper : MainHelper
     {
         private string baseURL;
-        private string womenTopsURL;
         private Random rnd = new Random();
+        private List<ClothesData> clothesToBuy = new List<ClothesData>();
+        private List<ClothesData> clothesInBasket = new List<ClothesData>();
 
-        public ClothesHelper(Manager manager, string baseURL, string womenTopsURL) : base(manager)
+        public ClothesHelper(Manager manager, string baseURL) : base(manager)
         {
             this.baseURL = baseURL;
-            this.womenTopsURL = womenTopsURL;
         }
 
         private void GoToURL(string sex, string typeOfClothes)
@@ -26,6 +27,21 @@ namespace AutotestingOnlineShops.Luma
             {
                 case "male":
                     {
+                        switch (typeOfClothes.ToLower())
+                        {
+                            case "tops":
+                                {
+                                    driver.Navigate().GoToUrl(baseURL + "/men/tops-men.html");
+                                    new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(element => element.FindElement(By.CssSelector("span[class='base'][data-ui-id='page-title-wrapper']")).Text == "Tops");
+                                    break;
+                                }
+                            case "bottoms":
+                                {
+                                    driver.Navigate().GoToUrl(baseURL + "/men/bottoms-men.html");
+                                    new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(element => element.FindElement(By.CssSelector("span[class='base'][data-ui-id='page-title-wrapper']")).Text == "Bottoms");
+                                    break;
+                                }
+                        }
                         break;
                     }
                 case "female":
@@ -34,8 +50,14 @@ namespace AutotestingOnlineShops.Luma
                         {
                             case "tops":
                                 {
-                                    driver.Navigate().GoToUrl(baseURL + womenTopsURL);
+                                    driver.Navigate().GoToUrl(baseURL + "/women/tops-women.html");
                                     new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(element => element.FindElement(By.CssSelector("span[class='base'][data-ui-id='page-title-wrapper']")).Text == "Tops");
+                                    break;
+                                }
+                            case "bottoms":
+                                {
+                                    driver.Navigate().GoToUrl(baseURL + "/women/bottoms-women.html");
+                                    new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(element => element.FindElement(By.CssSelector("span[class='base'][data-ui-id='page-title-wrapper']")).Text == "Bottoms");
                                     break;
                                 }
                         }
@@ -50,7 +72,102 @@ namespace AutotestingOnlineShops.Luma
             return optionWebElement;
         }
 
-        public void ChooseSingleOption(ClothesData clothes, string sex, string typeOfClothes, string option)
+        public void BuyClothes(ClothesData clothes, string sex, string typeOfClothes, string option)
+        {
+            ChooseSingleOption(clothes, sex, typeOfClothes, option);
+            AddClothesToCart(clothes, sex, typeOfClothes);
+            CheckProductsInCartPage(sex, typeOfClothes);
+            ConfirmThePurchase();
+        }
+
+        private void ConfirmThePurchase()
+        {
+            Thread.Sleep(5000);
+            driver.FindElement(By.CssSelector("button[class='action primary checkout'][data-role='proceed-to-checkout']")).Click();
+            Thread.Sleep(15000);
+            driver.FindElement(By.ClassName("radio")).Click();
+            driver.FindElement(By.CssSelector("button[data-role='opc-continue']")).Click();
+            Thread.Sleep(15000);
+            driver.FindElement(By.CssSelector("button[class='action primary checkout']")).Click();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(element => element.FindElement(By.ClassName("base")).Text == "Thank you for your purchase!");
+        }
+
+        private void CheckProductsInCartPage(string sex, string typeOfClothes)
+        {
+            manager.Navigator.GoToShoppingCartPage();
+            IWebElement cartTable = driver.FindElement(By.Id("shopping-cart-table"));
+            List<IWebElement> products = cartTable.FindElements(By.CssSelector("tbody[class='cart item']")).ToList();
+            foreach (IWebElement product in products)
+            {
+                IWebElement itemDetailes = product.FindElement(By.ClassName("item-info"));
+                IWebElement itemOptions = itemDetailes.FindElement(By.CssSelector("td[data-th='Item']")).FindElement(By.ClassName("product-item-details"));
+                string productName = itemDetailes.FindElement(By.ClassName("product-item-name")).FindElement(By.TagName("a")).Text;
+                List<IWebElement> itemInfo = itemOptions.FindElement(By.ClassName("item-options")).FindElements(By.TagName("dd")).ToList();
+                string productSize = itemInfo[0].Text;
+                string productColor = itemInfo[1].Text;
+                string productPrice = itemDetailes.FindElement(By.ClassName("price")).Text.Replace("$","");
+                GetListOfClothesFromBasket(sex, typeOfClothes, productSize, productColor, productName, productPrice);
+            }
+            clothesToBuy.Sort();
+            clothesInBasket.Sort();
+            clothesToBuy.Equals(clothesInBasket);
+        }
+
+        private void GetListOfClothesFromBasket(string sex, string typeOfClothes, string productSize, string productColor, string productName, string productPrice)
+        {
+            if (sex.ToLower() == "female")
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    ClothesData clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes()
+                        {
+                            TopsWoman = new TopsWoman()
+                        }
+                    };
+                    MakeListOfClothes(clothes, sex, typeOfClothes, productSize, productColor, productName, productPrice);
+                }
+                if (typeOfClothes.ToLower() == "bottoms")
+                {
+                    ClothesData clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes()
+                        {
+                            BottomsWoman = new BottomsWoman()
+                        }
+                    };
+                    MakeListOfClothes(clothes, sex, typeOfClothes, productSize, productColor, productName, productPrice);
+                }
+            }
+            else
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    ClothesData clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes()
+                        {
+                            TopsMan = new TopsMan()
+                        }
+                    };
+                    MakeListOfClothes(clothes, sex, typeOfClothes, productSize, productColor, productName, productPrice);
+                }
+                if (typeOfClothes.ToLower() == "bottoms")
+                {
+                    ClothesData clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes()
+                        {
+                            BottomsMan = new BottomsMan()
+                        }
+                    };
+                    MakeListOfClothes(clothes, sex, typeOfClothes, productSize, productColor, productName, productPrice);
+                }
+            }
+        }
+
+        private void ChooseSingleOption(ClothesData clothes, string sex, string typeOfClothes, string option)
         {
             GoToURL(sex, typeOfClothes);
             if (option.ToLower() == "category")
@@ -105,10 +222,13 @@ namespace AutotestingOnlineShops.Luma
             {
                 ChooseClimate(clothes, sex, option, typeOfClothes);
             }
+            int countOfClothes = GetCountOfClothes();
+            int countOfClothesFromToolbar = GetCountOfItemsFromToolbar();
+            Assert.AreEqual(countOfClothes, countOfClothesFromToolbar);
         }
 
         // get count of clothes after choosing some shopping option
-        public int GetCountOfClothes()
+        private int GetCountOfClothes()
         {
             if (driver.FindElement(By.Id("toolbar-amount")).Text.Contains("of")) // if more than one page of products
             {
@@ -120,7 +240,7 @@ namespace AutotestingOnlineShops.Luma
                     IWebElement anotherProductsGrid = driver.FindElement(By.CssSelector("div[class='products wrapper grid products-grid']")).FindElement(By.CssSelector("ol[class='products list items product-items']"));
                     List<IWebElement> newListOfProducts = anotherProductsGrid.FindElements(By.CssSelector("li[class='item product product-item']")).ToList();
                     listOfProducts.AddRange(newListOfProducts);
-                    Thread.Sleep(5);
+                    Thread.Sleep(5000);
                 }
                 while (driver.FindElements(By.CssSelector("a[class='action  next']")).Count != 0);
                 return listOfProducts.Count;
@@ -134,11 +254,11 @@ namespace AutotestingOnlineShops.Luma
         }
 
         // get count of clothes from toolbar after choosing some shopping option
-        public int GetCountOfItemsFromToolbar()
+        private int GetCountOfItemsFromToolbar()
         {
             if (driver.FindElement(By.Id("toolbar-amount")).Text.Contains("of"))
             {
-                return Int32.Parse(driver.FindElement(By.Id("toolbar-amount")).Text.Split( new string[] { "of" }, StringSplitOptions.None)[1]);
+                return Int32.Parse(driver.FindElement(By.Id("toolbar-amount")).Text.Split(new string[] { "of" }, StringSplitOptions.None)[1]);
             }
             else
             {
@@ -146,26 +266,132 @@ namespace AutotestingOnlineShops.Luma
             }
         }
 
-        public void AddClothesToCart()
+        private void AddClothesToCart(ClothesData clothes, string sex, string typeOfClothes)
         {
             IWebElement productsGrid = driver.FindElement(By.CssSelector("div[class='products wrapper grid products-grid']")).FindElement(By.CssSelector("ol[class='products list items product-items']"));
             List<IWebElement> listOfProducts = productsGrid.FindElements(By.CssSelector("li[class='item product product-item']")).ToList();
-            IWebElement product = listOfProducts[rnd.Next(listOfProducts.Count())].FindElement(By.ClassName("product-item-info")); // get product info like sizes and colors
+            IWebElement product = listOfProducts[rnd.Next(listOfProducts.Count())].FindElement(By.ClassName("product-item-info")); // get product info like sizes and colors  
+            string choosenSize;
+            string choosenColor;
+            // check if size is already choosen
+            try
+            {
+                choosenSize = product.FindElement(By.CssSelector("div[class='swatch-attribute size']")).FindElement(By.CssSelector("div[class='swatch-option text selected']")).Text; 
+            }
+            catch
+            {
+                choosenSize = null;
+            }
 
-            IWebElement chechIfChoosenSize = product.FindElement(By.CssSelector("div[class='swatch-attribute size']")).FindElements(By.CssSelector("div[class='swatch-option text']")).Where(element => element.GetAttribute("aria-checked") == "true").DefaultIfEmpty(null).First(); // check if size is already choosen
+            // check if color is already choosen
+            try
+            {
+                choosenColor = product.FindElement(By.CssSelector("div[class='swatch-attribute color']")).FindElement(By.CssSelector("div[class='swatch-option color selected']")).GetAttribute("option-label"); 
+            }
+            catch
+            {
+                choosenColor = null;
+            }
 
-            IWebElement checkIfChoosenColor = product.FindElement(By.CssSelector("div[class='swatch-attribute color']")).FindElements(By.CssSelector("div[class='swatch-option color']")).Where(element => element.GetAttribute("aria-checked") == "true").DefaultIfEmpty(null).First(); // check if color is already choosen
             // if size is not choosen, so choose one
-            if (chechIfChoosenSize == null)
+            if (choosenSize == null)
             {
                 product.FindElement(By.CssSelector("div[class='swatch-attribute size']")).FindElement(By.CssSelector("div[class='swatch-option text']")).Click();
+                choosenSize = product.FindElement(By.CssSelector("div[class='swatch-attribute size']")).FindElement(By.CssSelector("div[class='swatch-option text selected']")).Text;
             }
             // if color is not choosen, so choose one
-            if (checkIfChoosenColor == null)
+            if (choosenColor == null)
             {
                 product.FindElement(By.CssSelector("div[class='swatch-attribute color']")).FindElement(By.CssSelector("div[class='swatch-option color']")).Click();
+                choosenColor = product.FindElement(By.CssSelector("div[class='swatch-attribute color']")).FindElement(By.CssSelector("div[class='swatch-option color selected']")).GetAttribute("option-label");
             }
+            string productName = product.FindElement(By.CssSelector("strong[class='product name product-item-name']")).FindElement(By.TagName("a")).Text;
+            string productPrice = product.FindElement(By.ClassName("price")).Text.Replace("$","");
+            MakeListOfClothes(clothes, sex, typeOfClothes, choosenSize, choosenColor, productName, productPrice);
             product.FindElement(By.CssSelector("button[type='submit'][title='Add to Cart']")).Click();
+            Thread.Sleep(10000);
+        }
+
+        private void MakeListOfClothes(ClothesData clothes, string sex, string typeOfClothes, string choosenSize, string choosenColor, string productName, string productPrice)
+        {
+            if (sex.ToLower() == "female")
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes.WomenClothes.TopsWoman.Name = productName;
+                    clothes.WomenClothes.TopsWoman.PriceTops = new PriceTops
+                    {
+                        Price = productPrice
+                    };
+                    clothes.WomenClothes.TopsWoman.ColorTops = new ColorTops
+                    {
+                        Color = choosenColor
+                    };
+                    clothes.WomenClothes.TopsWoman.SizeTops = new SizeTops
+                    {
+                        Size = choosenSize
+                    };
+                }
+                if (typeOfClothes.ToLower() == "bottoms")
+                {
+                    clothes.WomenClothes.BottomsWoman.Name = productName;
+                    clothes.WomenClothes.BottomsWoman.PriceBottoms = new PriceBottoms
+                    {
+                        Price = productPrice
+                    };
+                    clothes.WomenClothes.BottomsWoman.ColorBottoms = new ColorBottoms
+                    {
+                        Color = choosenColor
+                    };
+                    clothes.WomenClothes.BottomsWoman.SizeBottoms = new SizeBottoms
+                    {
+                        Size = choosenSize
+                    };
+                }
+            }
+            else
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes.MenClothes.TopsMan.Name = productName;
+                    clothes.MenClothes.TopsMan.PriceTops = new PriceTops
+                    {
+                        Price = productPrice
+                    };
+                    clothes.MenClothes.TopsMan.ColorTops = new ColorTops
+                    {
+                        Color = choosenColor
+                    };
+                    clothes.MenClothes.TopsMan.SizeTops = new SizeTops
+                    {
+                        Size = choosenSize
+                    };
+                }
+                if (typeOfClothes.ToLower() == "bottoms")
+                {
+                    clothes.MenClothes.BottomsMan.Name = productName;
+                    clothes.MenClothes.BottomsMan.PriceBottoms = new PriceBottoms
+                    {
+                        Price = productPrice
+                    };
+                    clothes.MenClothes.BottomsMan.ColorBottoms = new ColorBottoms
+                    {
+                        Color = choosenColor
+                    };
+                    clothes.MenClothes.BottomsMan.SizeBottoms = new SizeBottoms
+                    {
+                        Size = choosenSize
+                    };
+                }
+            }
+            if (clothesToBuy.Count() == 0)
+            {
+                clothesToBuy.Add(clothes);
+            }
+            else
+            {
+                clothesInBasket.Add(clothes);
+            }
         }
 
         private void WaitCollapsedList(string option)
@@ -583,41 +809,51 @@ namespace AutotestingOnlineShops.Luma
 
         private void ClickOption(string option, string valueFromOption)
         {
-            if (option.ToLower() != "color")
+            if (option.ToLower() == "color")
+            {
+                ClickColor(option, valueFromOption);
+            }
+            else
             {
                 IWebElement itemsElement = GetShoppingOptions().Where(element => element.FindElement(By.ClassName("filter-options-title")).Text.ToLower() == option.ToLower()).First().FindElement(By.CssSelector("ol[class='items']")); // list of items with links for each category
                 if (option.ToLower() == "price")
                 {
-                    var itemsWithPrices = itemsElement.FindElements(By.CssSelector("li[class='item']")).Select(element => element.FindElement(By.TagName("a")).FindElements(By.CssSelector("span[class='price']"))).ToList();
-                    IWebElement selectedPrice = null;
-                    // choose the price
-                    for (int i = 0; i < itemsWithPrices.Count(); i++)
-                    {
-                        for (int y = 0; y < itemsWithPrices[i].Count() - 1; y++)
-                        {
-                            if ($"{itemsWithPrices[i][y].Text} - {itemsWithPrices[i][y + 1].Text}" == valueFromOption)
-                            {
-                                selectedPrice = itemsWithPrices[i][y];
-                            }
-                        }
-                    }
-                    selectedPrice.Click(); // click item with link for choosen category
+                    ClickPrice(option, valueFromOption, itemsElement);
                 }
                 else
                 {
                     itemsElement.FindElements(By.CssSelector("li[class='item']")).Where(element => Regex.Split(element.FindElement(By.TagName("a")).Text.ToLower(), @"\d")[0].Trim() == valueFromOption).First().FindElement(By.TagName("a")).Click(); // click item with link for choosen category
                 }
             }
-            if (option.ToLower() == "color")
-            {
-                IWebElement itemsElement = GetShoppingOptions().Where(element => element.FindElement(By.ClassName("filter-options-title")).Text.ToLower() == option.ToLower()).First().FindElement(By.CssSelector("div[class='swatch-attribute swatch-layered color']")); // list of colors
-
-                ICollection<IWebElement> webElementsColors = itemsElement.FindElement(By.CssSelector("div[class='swatch-attribute-options clearfix']")).FindElements(By.TagName("a")); // list of items with links
-
-                webElementsColors.Where(element => element.FindElement(By.TagName("div")).GetAttribute("option-label").ToLower() == valueFromOption.ToLower()).First().FindElement(By.TagName("div")).Click(); // click choosen color
-            }
             // wait
             new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(element => element.FindElement(By.ClassName("filter-current")).FindElements(By.CssSelector("li[class='item']")).Where(item => item.FindElement(By.ClassName("filter-value")).Text.ToLower() == valueFromOption));
+        }
+
+        private void ClickPrice(string option, string valueFromOption, IWebElement itemsElement)
+        {
+            var itemsWithPrices = itemsElement.FindElements(By.CssSelector("li[class='item']")).Select(element => element.FindElement(By.TagName("a")).FindElements(By.CssSelector("span[class='price']"))).ToList();
+            IWebElement selectedPrice = null;
+            // choose the price
+            for (int i = 0; i < itemsWithPrices.Count(); i++)
+            {
+                for (int y = 0; y < itemsWithPrices[i].Count() - 1; y++)
+                {
+                    if ($"{itemsWithPrices[i][y].Text} - {itemsWithPrices[i][y + 1].Text}" == valueFromOption)
+                    {
+                        selectedPrice = itemsWithPrices[i][y];
+                    }
+                }
+            }
+            selectedPrice.Click(); // click item with link for choosen category
+        }
+
+        private void ClickColor(string option, string valueFromOption)
+        {
+            IWebElement itemsElement = GetShoppingOptions().Where(element => element.FindElement(By.ClassName("filter-options-title")).Text.ToLower() == option.ToLower()).First().FindElement(By.CssSelector("div[class='swatch-attribute swatch-layered color']")); // list of colors
+
+            ICollection<IWebElement> webElementsColors = itemsElement.FindElement(By.CssSelector("div[class='swatch-attribute-options clearfix']")).FindElements(By.TagName("a")); // list of items with links
+
+            webElementsColors.Where(element => element.FindElement(By.TagName("div")).GetAttribute("option-label").ToLower() == valueFromOption.ToLower()).First().FindElement(By.TagName("div")).Click(); // click choosen color
         }
 
         private void ClickSize(string option, string kindOfOptions)

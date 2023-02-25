@@ -62,5 +62,17 @@ namespace AutotestingOnlineShops.Luma
             driver.Navigate().GoToUrl(baseURL + "/women/tops-women.html");
             new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(element => element.FindElement(By.CssSelector("span[class='base'][data-ui-id='page-title-wrapper']")).Text == "Tops");
         }
+
+        public void GoToShoppingCartPage()
+        {
+            driver.Navigate().GoToUrl(baseURL + "/checkout/cart/");
+            new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(element => element.FindElement(By.CssSelector("span[class='base'][data-ui-id='page-title-wrapper']")).Text == "Shopping Cart");
+        }
+
+        public void GoToOrderHistoryPage()
+        {
+            driver.Navigate().GoToUrl(baseURL + "/sales/order/history/");
+            new WebDriverWait(driver, TimeSpan.FromSeconds(30)).Until(element => element.FindElement(By.CssSelector("span[class='base'][data-ui-id='page-title-wrapper']")).Text == "My Orders");
+        }
     }
 }

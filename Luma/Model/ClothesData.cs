@@ -22,6 +22,7 @@
 
     public class TopsMan
     {
+        public string Name { get; set; }
         public CategoryTops CategoryTops { get; set; }
 
         public StyleTops StyleTops { get; set; }
@@ -40,6 +41,7 @@
 
     public class TopsWoman
     {
+        public string Name { get; set; }
         public CategoryTops CategoryTops { get; set; }
         public StyleTops StyleTops { get; set; }
         public SizeTops SizeTops { get; set; }
@@ -56,7 +58,8 @@
     }
 
     public class BottomsMan
-    {        
+    {
+        public string Name { get; set; }
         public CategoryBottoms CategoryBottoms { get; set; }
         public StyleBottoms StyleBottoms { get; set; }
         public SizeBottoms SizeBottoms { get; set; }
@@ -74,6 +77,7 @@
 
     public class BottomsWoman
     {
+        public string Name { get; set; }
         public CategoryBottoms CategoryBottoms { get; set; }
         public StyleBottoms StyleBottoms { get; set; }
         public SizeBottoms SizeBottoms { get; set; }
