@@ -72,8 +72,61 @@ namespace AutotestingOnlineShops.Luma
             return optionWebElement;
         }
 
-        public void BuyClothes(ClothesData clothes, string sex, string typeOfClothes, string option)
+        public void BuyClothes(string sex, string typeOfClothes, string option)
         {
+            ClothesData clothes = new ClothesData();
+            if (option.ToLower() == "category")
+            {
+                clothes = GetObjectWithCategory(sex, typeOfClothes);
+            }
+            if (option.ToLower() == "style")
+            {
+                clothes = GetObjectWithStyle(sex, typeOfClothes);
+            }
+            if (option.ToLower() == "size")
+            {
+                clothes = GetObjectWithSize(sex, typeOfClothes);
+            }
+            if (option.ToLower() == "price")
+            {
+                clothes = GetObjectWithPrice(sex, typeOfClothes);
+            }
+            if (option.ToLower() == "color")
+            {
+                clothes = GetObjectWithColor(sex, typeOfClothes);
+            }
+            if (option.ToLower() == "material")
+            {
+                clothes = GetObjectWithMaterial(sex, typeOfClothes);
+            }
+            if (option.ToLower() == "eco collection")
+            {
+                clothes = GetObjectWithEcoCollection(sex, typeOfClothes);
+            }
+            if (option.ToLower() == "performance fabric")
+            {
+                clothes = GetObjectWithPerformanceFabric(sex, typeOfClothes);
+            }
+            if (option.ToLower() == "erin recommends")
+            {
+                clothes = GetObjectWithErinRecommends(sex, typeOfClothes);
+            }
+            if (option.ToLower() == "new")
+            {
+                clothes = GetObjectWithNew(sex, typeOfClothes);
+            }
+            if (option.ToLower() == "sale")
+            {
+                clothes = GetObjectWithSale(sex, typeOfClothes);
+            }
+            if (option.ToLower() == "pattern")
+            {
+                clothes = GetObjectWithPattern(sex, typeOfClothes);
+            }
+            if (option.ToLower() == "climate")
+            {
+                clothes = GetObjectWithClimate(sex, typeOfClothes);
+            }
             ChooseSingleOption(clothes, sex, typeOfClothes, option);
             AddClothesToCart(clothes, sex, typeOfClothes);
             CheckProductsInCartPage(sex, typeOfClothes);
@@ -165,6 +218,934 @@ namespace AutotestingOnlineShops.Luma
                     MakeListOfClothes(clothes, sex, typeOfClothes, productSize, productColor, productName, productPrice);
                 }
             }
+        }
+
+        private ClothesData GetObjectWithCategory(string sex, string typeOfClothes)
+        {
+            ClothesData clothes;
+            if (sex.ToLower() == "female")
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            TopsWoman = new TopsWoman
+                            {
+                                CategoryTops = new CategoryTops()
+                                {
+                                    Category = GetCategoryTops(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            BottomsWoman = new BottomsWoman
+                            {
+                                CategoryBottoms = new CategoryBottoms()
+                                {
+                                    Category = GetCategoryBottoms(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+            }
+            else
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            TopsMan = new TopsMan
+                            {
+                                CategoryTops = new CategoryTops()
+                                {
+                                    Category = GetCategoryTops(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            BottomsMan = new BottomsMan
+                            {
+                                CategoryBottoms = new CategoryBottoms()
+                                {
+                                    Category = GetCategoryBottoms(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+            }
+            return clothes;
+        }
+
+        private ClothesData GetObjectWithStyle(string sex, string typeOfClothes)
+        {
+            ClothesData clothes;
+            if (sex.ToLower() == "female")
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            TopsWoman = new TopsWoman
+                            {
+                                StyleTops = new StyleTops()
+                                {
+                                    Style = GetStyleTops(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            BottomsWoman = new BottomsWoman
+                            {
+                                StyleBottoms = new StyleBottoms()
+                                {
+                                    Style = GetStyleBottoms(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+            }
+            else
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            TopsMan = new TopsMan
+                            {
+                                StyleTops = new StyleTops()
+                                {
+                                    Style = GetStyleTops(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            BottomsMan = new BottomsMan
+                            {
+                                StyleBottoms = new StyleBottoms()
+                                {
+                                    Style = GetStyleBottoms(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+            }
+            return clothes;
+        }
+
+        private ClothesData GetObjectWithSize(string sex, string typeOfClothes)
+        {
+            ClothesData clothes;
+            if (sex.ToLower() == "female")
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            TopsWoman = new TopsWoman
+                            {
+                                SizeTops = new SizeTops()
+                                {
+                                    Size = GetSizeTops(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            BottomsWoman = new BottomsWoman
+                            {
+                                SizeBottoms = new SizeBottoms()
+                                {
+                                    Size = GetSizeBottoms(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+            }
+            else
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            TopsMan = new TopsMan
+                            {
+                                SizeTops = new SizeTops()
+                                {
+                                    Size = GetSizeTops(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            BottomsMan = new BottomsMan
+                            {
+                                SizeBottoms = new SizeBottoms()
+                                {
+                                    Size = GetSizeBottoms(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+            }
+            return clothes;
+        }
+
+        private ClothesData GetObjectWithPrice(string sex, string typeOfClothes)
+        {
+            ClothesData clothes;
+            if (sex.ToLower() == "female")
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            TopsWoman = new TopsWoman
+                            {
+                                PriceTops = new PriceTops()
+                                {
+                                    Price = GetPriceTops(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            BottomsWoman = new BottomsWoman
+                            {
+                                PriceBottoms = new PriceBottoms()
+                                {
+                                    Price = GetPriceBottoms(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+            }
+            else
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            TopsMan = new TopsMan
+                            {
+                                PriceTops = new PriceTops()
+                                {
+                                    Price = GetPriceTops(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            BottomsMan = new BottomsMan
+                            {
+                                PriceBottoms = new PriceBottoms()
+                                {
+                                    Price = GetPriceBottoms(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+            }
+            return clothes;
+        }
+
+        private ClothesData GetObjectWithColor(string sex, string typeOfClothes)
+        {
+            ClothesData clothes;
+            if (sex.ToLower() == "female")
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            TopsWoman = new TopsWoman
+                            {
+                                ColorTops = new ColorTops()
+                                {
+                                    Color = GetColorTops(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            BottomsWoman = new BottomsWoman
+                            {
+                                ColorBottoms = new ColorBottoms()
+                                {
+                                    Color = GetColorBottoms(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+            }
+            else
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            TopsMan = new TopsMan
+                            {
+                                ColorTops = new ColorTops()
+                                {
+                                    Color = GetColorTops(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            BottomsMan = new BottomsMan
+                            {
+                                ColorBottoms = new ColorBottoms()
+                                {
+                                    Color = GetColorBottoms(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+            }
+            return clothes;
+        }
+
+        private ClothesData GetObjectWithMaterial(string sex, string typeOfClothes)
+        {
+            ClothesData clothes;
+            if (sex.ToLower() == "female")
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            TopsWoman = new TopsWoman
+                            {
+                                MaterialTops = new MaterialTops()
+                                {
+                                    Material = GetMaterialTops(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            BottomsWoman = new BottomsWoman
+                            {
+                                MaterialBottoms = new MaterialBottoms()
+                                {
+                                    Material = GetMaterialBottoms(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+            }
+            else
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            TopsMan = new TopsMan
+                            {
+                                MaterialTops = new MaterialTops()
+                                {
+                                    Material = GetMaterialTops(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            BottomsMan = new BottomsMan
+                            {
+                                MaterialBottoms = new MaterialBottoms()
+                                {
+                                    Material = GetMaterialBottoms(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+            }
+            return clothes;
+        }
+
+        private ClothesData GetObjectWithEcoCollection(string sex, string typeOfClothes)
+        {
+            ClothesData clothes;
+            if (sex.ToLower() == "female")
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            TopsWoman = new TopsWoman
+                            {
+                                EcoCollection = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            BottomsWoman = new BottomsWoman
+                            {
+                                EcoCollection = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+            }
+            else
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            TopsMan = new TopsMan
+                            {
+                                EcoCollection = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            BottomsMan = new BottomsMan
+                            {
+                                EcoCollection = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+            }
+            return clothes;
+        }
+
+        private ClothesData GetObjectWithPerformanceFabric(string sex, string typeOfClothes)
+        {
+            ClothesData clothes;
+            if (sex.ToLower() == "female")
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            TopsWoman = new TopsWoman
+                            {
+                                PerformanceFabric = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            BottomsWoman = new BottomsWoman
+                            {
+                                PerformanceFabric = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+            }
+            else
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            TopsMan = new TopsMan
+                            {
+                                PerformanceFabric = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            BottomsMan = new BottomsMan
+                            {
+                                PerformanceFabric = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+            }
+            return clothes;
+        }
+
+        private ClothesData GetObjectWithErinRecommends(string sex, string typeOfClothes)
+        {
+            ClothesData clothes;
+            if (sex.ToLower() == "female")
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            TopsWoman = new TopsWoman
+                            {
+                                ErinRecommends = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            BottomsWoman = new BottomsWoman
+                            {
+                                ErinRecommends = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+            }
+            else
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            TopsMan = new TopsMan
+                            {
+                                ErinRecommends = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            BottomsMan = new BottomsMan
+                            {
+                                ErinRecommends = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+            }
+            return clothes;
+        }
+
+        private ClothesData GetObjectWithNew(string sex, string typeOfClothes)
+        {
+            ClothesData clothes;
+            if (sex.ToLower() == "female")
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            TopsWoman = new TopsWoman
+                            {
+                                New = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            BottomsWoman = new BottomsWoman
+                            {
+                                New = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+            }
+            else
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            TopsMan = new TopsMan
+                            {
+                                New = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            BottomsMan = new BottomsMan
+                            {
+                                New = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+            }
+            return clothes;
+        }
+
+        private ClothesData GetObjectWithSale(string sex, string typeOfClothes)
+        {
+            ClothesData clothes;
+            if (sex.ToLower() == "female")
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            TopsWoman = new TopsWoman
+                            {
+                                Sale = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            BottomsWoman = new BottomsWoman
+                            {
+                                Sale = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+            }
+            else
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            TopsMan = new TopsMan
+                            {
+                                Sale = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            BottomsMan = new BottomsMan
+                            {
+                                Sale = GetYesOrNo()
+                            }
+                        }
+                    };
+                }
+            }
+            return clothes;
+        }
+
+        private ClothesData GetObjectWithPattern(string sex, string typeOfClothes)
+        {
+            ClothesData clothes;
+            if (sex.ToLower() == "female")
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            TopsWoman = new TopsWoman
+                            {
+                                PatternTops = new PatternTops()
+                                {
+                                    Pattern = GetPatternTops(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            BottomsWoman = new BottomsWoman
+                            {
+                                PatternBottoms = new PatternBottoms()
+                                {
+                                    Pattern = GetPatternBottoms(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+            }
+            else
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            TopsMan = new TopsMan
+                            {
+                                PatternTops = new PatternTops()
+                                {
+                                    Pattern = GetPatternTops(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            BottomsMan = new BottomsMan
+                            {
+                                PatternBottoms = new PatternBottoms()
+                                {
+                                    Pattern = GetPatternBottoms(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+            }
+            return clothes;
+        }
+
+        private ClothesData GetObjectWithClimate(string sex, string typeOfClothes)
+        {
+            ClothesData clothes;
+            if (sex.ToLower() == "female")
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            TopsWoman = new TopsWoman
+                            {
+                                ClimateTops = new ClimateTops()
+                                {
+                                    Climate = GetClimateTops(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        WomenClothes = new WomenClothes
+                        {
+                            BottomsWoman = new BottomsWoman
+                            {
+                                ClimateBottoms = new ClimateBottoms()
+                                {
+                                    Climate = GetClimateBottoms(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+            }
+            else
+            {
+                if (typeOfClothes.ToLower() == "tops")
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            TopsMan = new TopsMan
+                            {
+                                ClimateTops = new ClimateTops()
+                                {
+                                    Climate = GetClimateTops(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    clothes = new ClothesData()
+                    {
+                        MenClothes = new MenClothes
+                        {
+                            BottomsMan = new BottomsMan
+                            {
+                                ClimateBottoms = new ClimateBottoms()
+                                {
+                                    Climate = GetClimateBottoms(sex)
+                                }
+                            }
+                        }
+                    };
+                }
+            }
+            return clothes;
         }
 
         private void ChooseSingleOption(ClothesData clothes, string sex, string typeOfClothes, string option)
@@ -813,6 +1794,10 @@ namespace AutotestingOnlineShops.Luma
             {
                 ClickColor(option, valueFromOption);
             }
+            else if (option.ToLower() == "size")
+            {
+                ClickSize(option, valueFromOption);
+            }
             else
             {
                 IWebElement itemsElement = GetShoppingOptions().Where(element => element.FindElement(By.ClassName("filter-options-title")).Text.ToLower() == option.ToLower()).First().FindElement(By.CssSelector("ol[class='items']")); // list of items with links for each category
@@ -826,7 +1811,7 @@ namespace AutotestingOnlineShops.Luma
                 }
             }
             // wait
-            new WebDriverWait(driver, TimeSpan.FromSeconds(15)).Until(element => element.FindElement(By.ClassName("filter-current")).FindElements(By.CssSelector("li[class='item']")).Where(item => item.FindElement(By.ClassName("filter-value")).Text.ToLower() == valueFromOption));
+            Thread.Sleep(5000);
         }
 
         private void ClickPrice(string option, string valueFromOption, IWebElement itemsElement)
@@ -859,6 +1844,7 @@ namespace AutotestingOnlineShops.Luma
         private void ClickSize(string option, string kindOfOptions)
         {
             IWebElement itemsElement = GetShoppingOptions().Where(element => element.FindElement(By.ClassName("filter-options-title")).Text.ToLower() == option.ToLower()).First().FindElement(By.CssSelector("div[class='swatch-attribute-options clearfix']")); // list of items with links for each category
+            
             itemsElement.FindElements(By.TagName("a")).Where(element => element.GetAttribute("aria-label").ToLower().Trim() == kindOfOptions).First().FindElement(By.TagName("div")).Click();  // click item with link for choosen category
         }
     }
